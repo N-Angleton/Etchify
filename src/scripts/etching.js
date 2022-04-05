@@ -3,15 +3,20 @@ export class Etching {
     this.unit = parseInt(document.querySelector("input[name='unit']:checked").value);
     this.area = this.unit * this.unit;
 
-    this.shadingIndex = parseInt(document.querySelector("input[name='shading']:checked").value)
+    this.animate = true
+    // Boolean(document.querySelector("input[name='unit']:checked").value) === "true";
+    this.animationDelay = .001
     debugger
+
+    this.distinctShades = parseInt(document.querySelector("input[name='shades']:checked").value)
+    this.shadingIndex = parseInt(document.querySelector("input[name='shading']:checked").value)
 
     this.width = bitMap.width - (bitMap.width % this.unit)
     this.hor = this.width / this.unit
     
     this.height = bitMap.height - (bitMap.height % this.unit)
     this.vert = this.height / this.unit
-    
+
     this.hiddenCanvas = new OffscreenCanvas(this.width, this.height);
     this.hiddenCtx = this.hiddenCanvas.getContext('2d');
     this.hiddenCtx.drawImage(bitMap, 0, 0, this.width, this.height);
@@ -44,15 +49,16 @@ export class Etching {
           acc += .114 * this.oldData.data[startingPixel + 2]
         }
         let val = Math.floor(acc / this.area)
-        this.drawCell(pixelsBeforeCell, val)
+        if (this.animate) { setTimeout(this.drawCell.bind(this, pixelsBeforeCell, val), this.animationDelay); }
+        else this.drawCell(pixelsBeforeCell, val);
       }
     }
-    this.ctx.putImageData(this.newData, 0, 0);
+    if (!this.animate) this.ctx.putImageData(this.newData, 0, 0);
   }
 
   drawCell(pixelsBeforeCell, val){
     if (this.shadingIndex === 0) { this.basicShade(pixelsBeforeCell, val) }
-    else if (this.shadingIndex === 1) { this.veritcalHash(pixelsBeforeCell, val)}
+    else if (this.shadingIndex === 1) { this.veritcalHash2(pixelsBeforeCell, val)}
   }
 
   veritcalHash(pixelsBeforeCell, val){
@@ -67,6 +73,22 @@ export class Etching {
         this.newData.data[startingPixel + (j * 4) + 3] = 255
       }    
     }
+  }
+
+  veritcalHash2(pixelsBeforeCell, val) {
+    let numberOfShadings = this.distinctShades * this.unit
+    let interval = (256 / (this.unit * this.distinctShades)) / 2
+    let shadeValue = numberOfShadings - Math.floor(val / interval)
+
+    for (let i = 0; i < this.unit; i++) {
+      let pixelsAboveInCell = i * this.width * 4
+      let startingPixel = pixelsBeforeCell + pixelsAboveInCell
+
+      for (let j = 0; j < shadeValue; j++) {
+        this.newData.data[startingPixel + ((j % this.unit) * 4) + 3] += (256 / this.distinctShades)
+      }
+    }
+    if (this.animate) this.ctx.putImageData(this.newData, 0, 0);
   }
 
   basicShade(pixelsBeforeCell, val){
