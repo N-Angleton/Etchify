@@ -12,12 +12,37 @@
 
 <body>
     <!-- <main id="main"></main> -->
-    <label>upload
+    <label>Upload
+        <br>
+        <br>
+        <label id="unit">Precision:
+            <br>
+            <label>3 pixels
+                <input type="radio" name="unit" value="3" checked>
+            </label>
+            <label>7 pixels
+                <input type="radio" name="unit" value="7">
+            </label>
+        </label>
+        <br>
+        <br>
+        <label id="Shading">Shading:
+            <br>
+            <label>Block
+                <input type="radio" name="shading" value="0" checked>
+            </label>
+            <label>Vertical hashing
+                <input type="radio" name="shading" value="1">
+            </label>
+        </label>
+        <br>
+        <br>
         <input type="file" id="upload" accept="image/*">
         <button id="submit">Submit</button>
+        <br>
         <div id="feedback"></div>
     </label>
-    <label>etching
+    <label>
         <canvas id="canvas"></canvas>
     </label>
 </body>
