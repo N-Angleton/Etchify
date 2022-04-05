@@ -3,12 +3,7 @@ import { Etching } from "./scripts/etching";
 function checkFile(e){
     e.stopPropagation()
     const file = e.target.files
-    if (file.length != 1) {
-        const feedback = document.getElementById("feedback")
-        feedback.innerText = "Invalid number of files";
-        debugger
-    }
-    else {
+    if (file.length ===1 ) {
         const button = document.getElementById("submit")
         button.addEventListener('click', processFile)
     }
