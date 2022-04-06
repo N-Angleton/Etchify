@@ -1,25 +1,51 @@
 body {
   font-family: 'IM Fell English SC', serif;
   margin: 32px;
+  background-color: hsla(25, 75, 31, .08);
+}
+
+body * {
+  margin: 0px;
 }
 
 header {
   display: inline-block;
   width: 100%;
+  margin: 0px
+}
+
+header h1 {
+  display: block;
+  font-size: 50px;
+  margin: 0px;
 }
 
 header ul {
   list-style: none;
-  float: right;
+  float: left;
+  margin: 0px;
 }
 
 header li {
   float: right;
-  padding: 16px;
+  padding-right: 16px;
+  padding-left: 16px;
 }
 
+input[type='radio']:checked:after {
+  accent-color: black;
+}
 
-label label {
+label {
+  margin-top: 0px;
+  margin-bottom: 0px;
   margin-left: 8px;
   margin-right: 8px;
+}
+
+#canvasContainer {
+  display: block;
+  width: 80%;
+  overflow: scroll;
+  height: fit-content;
 }

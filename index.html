@@ -13,69 +13,73 @@
 <body>
     <header>
         <h1>Etchify</h1>
-        <ul>
+        <ul id="personalLinks">
             <li>Github</li>
             <li>LinkedIn</li>
             <li>Email</li>
         </ul>
     </header>
-    <div id="settings">
-        <label id="animate">
-            <h3>Animate:</h3>
-            <label>Yes
-                <input type="radio" name="animate" value="true" checked>
+    <main>
+        <div id="settings">
+            <label id="animate">
+                <h3>Animate:</h3>
+                <label>Yes
+                    <input type="radio" name="animate" value="true" checked>
+                </label>
+                <label>No
+                    <input type="radio" name="animate" value="">
+                </label>
             </label>
-            <label>No
-                <input type="radio" name="animate" value="">
+            <label id="unit">
+                <h3>Precision:</h3>
+                <label>1 pixel
+                    <input type="radio" name="unit" value="1">
+                </label>
+                <label>2 pixels
+                    <input type="radio" name="unit" value="2">
+                </label>
+                <label>4 pixels
+                    <input type="radio" name="unit" value="4" checked>
+                </label>
+                <label>8 pixels
+                    <input type="radio" name="unit" value="8">
+                </label>
             </label>
-        </label>
-        <label id="unit">
-            <h3>Precision:</h3>
-            <label>1 pixel
-                <input type="radio" name="unit" value="1">
+            <label id="shades">
+                <h3>Distinct Shades:</h3>
+                <label>1
+                    <input type="radio" name="shades" value="1">
+                </label>
+                <label>2
+                    <input type="radio" name="shades" value="2">
+                </label>
+                <label>4
+                    <input type="radio" name="shades" value="4">
+                </label>
+                <label>8
+                    <input type="radio" name="shades" value="8" checked>
+                </label>
             </label>
-            <label>2 pixels
-                <input type="radio" name="unit" value="2">
+            <label id="Shading">
+                <h3>Shading Style:</h3>
+                <label>Block
+                    <input type="radio" name="shading" value="0">
+                </label>
+                <label>Vertical Hashing
+                    <input type="radio" name="shading" value="1" checked>
+                </label>
             </label>
-            <label>4 pixels
-                <input type="radio" name="unit" value="4" checked>
+            <label id="color">
+                <h3>Colour</h3>
+                <input type="color" name="color">
             </label>
-            <label>8 pixels
-                <input type="radio" name="unit" value="8">
-            </label>
-        </label>
-        <label id="shades">
-            <h3>Distinct Shades:</h3>
-            <label>1
-                <input type="radio" name="shades" value="1">
-            </label>
-            <label>2
-                <input type="radio" name="shades" value="2">
-            </label>
-            <label>3
-                <input type="radio" name="shades" value="3">
-            </label>
-            <label>8
-                <input type="radio" name="shades" value="8" checked>
-            </label>
-        </label>
-        <label id="Shading">
-            <h3>Shading Style:</h3>
-            <label>Block
-                <input type="radio" name="shading" value="0">
-            </label>
-            <label>Vertical Hashing
-                <input type="radio" name="shading" value="1" checked>
-            </label>
-        </label>
-        <label id="color">
-            <h3>Colour</h3>
-            <input type="color" name="color">
-        </label>
-        <input type="file" id="upload" accept="image/*">
-        <button id="submit">Submit</button>
-    </div>
-    <canvas id="canvas"></canvas>
+            <input type="file" id="upload" accept="image/*">
+            <button id="submit">Submit</button>
+        </div>
+        <div id="canvasContainer">
+            <canvas id="canvas"></canvas>
+        </div>
+    </main>
     <footer>
         <h3>Acknowledgements:</h3>
     </footer>
