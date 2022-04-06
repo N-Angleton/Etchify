@@ -1,7 +1,11 @@
 body {
   font-family: 'IM Fell English SC', serif;
   margin: 32px;
-  background-color: hsla(25, 75, 31, .08);
+  // background-color: hsla(25, 75, 31, .08);
+  // background-color: rgba(25, 75, 31, 0.348);
+  background-color: rgb(239, 235, 236);
+  // background-color: hsla(hue, saturation, lightness, alpha);
+  // background-color: black;
 }
 
 body * {

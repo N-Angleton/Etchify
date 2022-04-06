@@ -1,6 +1,6 @@
 export class Etching {
   constructor(bitMap){
-    this.unit = parseInt(document.querySelector("input[name='unit']:checked").value);
+    this.unit = parseInt(document.querySelector("input[name='unit']").value);
     this.area = this.unit * this.unit;
 
     // this.animate = true
@@ -12,7 +12,7 @@ export class Etching {
     this.colorStrings = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.color)
     this.rgb = { red: parseInt(this.colorStrings[1], 16), green: parseInt(this.colorStrings[2], 16), blue: parseInt(this.colorStrings[3], 16) }
 
-    this.distinctShades = parseInt(document.querySelector("input[name='shades']:checked").value)
+    this.distinctShades = parseInt(document.querySelector("input[name='shades']").value)
     this.shadingIndex = parseInt(document.querySelector("input[name='shading']:checked").value)
 
     this.width = bitMap.width - (bitMap.width % this.unit)
