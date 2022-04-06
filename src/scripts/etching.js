@@ -105,9 +105,9 @@ export class Etching {
       let startingPixel = pixelsBeforeCell + pixelsAboveInCell
 
       for (let j = 0; j < shadeValue; j++) {
-        this.newData.data[startingPixel + ((j % this.unit) * 4)] += redIncrement 
-        this.newData.data[startingPixel + ((j % this.unit) * 4) + 1] += greenIncrement 
-        this.newData.data[startingPixel + ((j % this.unit) * 4) + 2] += blueIncrement 
+        this.newData.data[startingPixel + ((j % this.unit) * 4)] = this.rgb.red
+        this.newData.data[startingPixel + ((j % this.unit) * 4) + 1] = this.rgb.green
+        this.newData.data[startingPixel + ((j % this.unit) * 4) + 2] = this.rgb.blue
         this.newData.data[startingPixel + ((j % this.unit) * 4) + 3] += (256 / this.distinctShades)
       }
     }
