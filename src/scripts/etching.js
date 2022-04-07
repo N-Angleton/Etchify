@@ -111,9 +111,6 @@ export class Etching {
     let avgGreen = accGreen / this.area
     let avgBlue = accBlue / this.area
     let avgDarkness= rawAcc / (this.area * 3) 
-    // console.log(avgRed)
-    // console.log(avgGreen)
-    // console.log(avgBlue)
     let squaredDiffRed = 0
     let squaredDiffGreen = 0
     let squaredDiffBlue = 0
@@ -128,11 +125,6 @@ export class Etching {
       squaredDiffGreen += Math.pow((this.oldData.data[startingPixel + 1] - avgGreen), 2)
       squaredDiffBlue += Math.pow((this.oldData.data[startingPixel + 2] - avgBlue), 2)
 
-      // darkness += .299 * this.oldData.data[startingPixel]
-      // darkness += .587 * this.oldData.data[startingPixel + 1]
-      // darkness += .114 * this.oldData.data[startingPixel + 2]
-      // squaredDiffDarkness += Math.pow( darkness - avgDarkness, 2)
-
       darkness += this.oldData.data[startingPixel]
       darkness += this.oldData.data[startingPixel + 1]
       darkness += this.oldData.data[startingPixel + 2]
@@ -142,18 +134,12 @@ export class Etching {
     let sDevGreen = Math.pow((squaredDiffGreen / (this.area)), .5)
     let sDevBlue = Math.pow((squaredDiffBlue / (this.area)), .5)
     let sDevDarkness = Math.pow((squaredDiffDarkness / this.area), .5)
-    // let modifiedDevRed = sDevRed / avgRed
-    // let modifiedDevGreen = sDevGreen / avgGreen
-    // let modifiedDevBlue = sDevBlue / avgBlue
-    // console.log(sDevRed)
-    // console.log(sDevGreen)
-    // console.log(sDevBlue)
-    if (sDevRed > this.lineConstant || sDevGreen > this.lineConstant || sDevBlue > this.lineConstant || sDevDarkness > this.lineConstant) {
+    if (sDevRed > this.lineConstant || sDevGreen > this.lineConstant ||
+      sDevBlue > this.lineConstant || sDevDarkness > this.lineConstant) {
       for (let i = 0; i < this.area; i++) {
         let pixelsAboveInCell = Math.floor(i / this.unit) * this.width * 4
         let pixelsLeftInCell = (i % this.unit) * 4
         let startingPixel = pixelsBeforeCell + pixelsAboveInCell + pixelsLeftInCell
-        // this.lineData.data[startingPixel] = this.rgb.red
         this.lineData.data[startingPixel] = this.lineRgb.red
         this.lineData.data[startingPixel + 1] = this.lineRgb.green
         this.lineData.data[startingPixel + 2] = this.lineRgb.blue
@@ -166,15 +152,13 @@ export class Etching {
     if (this.shadingIndex === 0) { this.basicShade(pixelsBeforeCell, val) }
     else if (this.shadingIndex === 1) { this.verticalHatching(pixelsBeforeCell, val)}
     else if (this.shadingIndex === 2) { this.horizontalHatching(pixelsBeforeCell, val)}
-    else if (this.shadingIndex === 3) {
-      
+    else if (this.shadingIndex === 3) {    
       this.verticalHatching(pixelsBeforeCell, val)
       this.horizontalHatching(pixelsBeforeCell, val)
     }
   }
 
   verticalHatching(pixelsBeforeCell, val) {
-    
     let numberOfShadings = this.distinctShades * this.unit
     let interval = (256 / (this.unit * this.distinctShades)) / 2
     let shadeValue = numberOfShadings - Math.floor(val / interval)
@@ -212,7 +196,6 @@ export class Etching {
   }
 
   basicShade(pixelsBeforeCell, val) {
-    debugger
     let ratio = val / 255
     for (let i = 0; i < this.area; i++) {
       let pixelsAboveInCell = Math.floor(i / this.unit) * this.width * 4
@@ -223,7 +206,6 @@ export class Etching {
       this.newData.data[startingPixel + 2] = ratio * this.rgb.blue
       this.newData.data[startingPixel + 3] = 255 - val
     }
-    // console.log(this.newData.data)
   }
 
 }

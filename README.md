@@ -1,4 +1,4 @@
-# Project Proposal for Etchify
+# Etchify
 
 ## Background and Core Functionality
 

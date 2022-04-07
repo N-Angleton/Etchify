@@ -1,15 +1,7 @@
 body {
   font-family: 'IM Fell English SC', serif;
   margin: 32px;
-  // background-color: hsla(25, 75, 31, .08);
-  // background-color: rgba(25, 75, 31, 0.348);
-
   background-color: rgb(239, 235, 236);
-
-  // background-color: rgb(216, 186, 150);
-
-  // background-color: hsla(hue, saturation, lightness, alpha);
-  // background-color: black;
 }
 
 body * {
@@ -21,7 +13,7 @@ header {
   width: 100%;
   margin: 0px;
   top: 0px;
-  position: relative;
+  // position: a;
 }
 
 header h1 {
@@ -36,6 +28,7 @@ header span.tooltip-text {
 }
 
 header ul {
+  display: block;
   list-style: none;
   float: left;
   margin: 0px;
@@ -58,33 +51,8 @@ label {
   margin-right: 8px;
 }
 
-.canvasContainer {
-  display: block;
-  width: 80%;
-  overflow: scroll;
-  height: fit-content;
-}
-
-.canvases {
-  display: block;
-  width: 80%;
-  min-height: 400px;
-  height: fit-content;
-}
-
-.canvas {
-  position: absolute;
-  z-index: 0;
-}
-
-.lineCanvas {
-  position: absolute;
-  z-index: 1;
-}
-
 footer {
   bottom: 0;
-  // position: fixed;
 }
 
 .slider {
@@ -110,3 +78,20 @@ footer {
 div#settings > label {
   display: block;
 }
+
+.canvasContainer {
+  position: relative;
+  display: block;
+  float: left;
+  width: 80%;
+  min-height: 1000px;
+  overflow: scroll;
+}
+
+.canvasContainer::-webkit-scrollbar {
+    display: none;
+  }
+  .canvasContainer {
+    -ms-overflow-style: none;
+    scrollbar-width: 200px;
+  }
