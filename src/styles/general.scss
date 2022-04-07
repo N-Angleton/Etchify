@@ -3,7 +3,11 @@ body {
   margin: 32px;
   // background-color: hsla(25, 75, 31, .08);
   // background-color: rgba(25, 75, 31, 0.348);
+
   background-color: rgb(239, 235, 236);
+
+  // background-color: rgb(216, 186, 150);
+
   // background-color: hsla(hue, saturation, lightness, alpha);
   // background-color: black;
 }
@@ -15,7 +19,9 @@ body * {
 header {
   display: inline-block;
   width: 100%;
-  margin: 0px
+  margin: 0px;
+  top: 0px;
+  position: relative;
 }
 
 header h1 {
@@ -47,9 +53,47 @@ label {
   margin-right: 8px;
 }
 
-#canvasContainer {
+.canvasContainer {
   display: block;
   width: 80%;
   overflow: scroll;
   height: fit-content;
+}
+
+.canvases {
+  display: block;
+  width: 80%;
+  min-height: 400px;
+  height: fit-content;
+}
+
+.canvas {
+  position: absolute;
+  z-index: 0;
+}
+
+.lineCanvas {
+  position: absolute;
+  z-index: 1;
+}
+
+footer {
+  bottom: 0;
+  // position: fixed;
+}
+
+.slider {
+  appearance: none;
+  width: 30%;
+  height: 12px;
+  background: black;
+  opacity: 0.5;
+}
+
+.tooltip-text{
+  visibility: hidden;
+}
+
+.tooltip:hover .tooltip-text{
+  visibility: visible;
 }

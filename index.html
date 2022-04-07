@@ -14,23 +14,33 @@
     <header>
         <h1>Etchify</h1>
         <ul id="personalLinks">
-            <li>Github</li>
-            <li>LinkedIn</li>
-            <li>Email</li>
+            <li><a href="mailto:nick.angleton@gmail.com">Email</a></li>
+            <li><a href="https://linkedin.com/in/nhangleton">LinkedIn</a></li>
+            <li><a href="https://github.com/N-Angleton">Github</a></li>
         </ul>
     </header>
     <main>
         <div id="settings">
-            <div class="slidecontainer">
-                <h2>Pixellation</h2>
-                <input type="range" min="1" max="16" value="4" name="unit" class="slider" oninput="this.nextElementSibling.value = this.value">
-                <output>4</output>
+            <div class="slidecontainer tooltip">
+                <h2>Pixellation:</h2>
+                <span></span>
+                <div class="tooltip-text">
+                    <p>Pixllation adfasdf</p>
+                </div>
+                <input type="range" min="1" max="10" value="3" name="unit" class="slider" oninput="this.nextElementSibling.value = this.value">
+                <output>3</output>
             </div>
             <div class="slidecontainer">
                 <h2>Distinct Shades:</h2>
-                <input type="range" min="1" max="16" value="4" name="shades" class="slider"
+                <input type="range" min="1" max="10" value="2" name="shades" class="slider"
                     oninput="this.nextElementSibling.value = this.value">
-                <output>4</output>
+                <output>2</output>
+            </div>
+            <div class="slidecontainer">
+                <h2>Line sensitivity:</h2>
+                <input type="range" min="1" max="100" value="50" name="lineSensitivity" class="slider"
+                    oninput="this.nextElementSibling.value = this.value">
+                <output>50</output>
             </div>
             <label id="animate">
                 <h2>Animate:</h2>
@@ -39,6 +49,24 @@
                 </label>
                 <label>No
                     <input type="radio" name="animate" value="">
+                </label>
+            </label>
+            <label id="shadingBool">
+                <h2>Shading:</h2>
+                <label>Yes
+                    <input type="radio" name="shadeBool" value="true" checked>
+                </label>
+                <label>No
+                    <input type="radio" name="shadeBool" value="">
+                </label>
+            </label>
+            <label id="lineBool">
+                <h2>Linework:</h2>
+                <label>Yes
+                    <input type="radio" name="lineBool" value="true">
+                </label>
+                <label>No
+                    <input type="radio" name="lineBool" value="" checked>
                 </label>
             </label>
             <label id="Shading">
@@ -51,18 +79,30 @@
                 </label>
             </label>
             <label id="color">
-                <h2>Colour</h2>
-                <input type="color" name="color">
+                <h2>Shading Colour:</h2>
+                <input type="color" name="shadeColor">
             </label>
-            <input type="file" id="upload" accept="image/*">
-            <button id="submit">Submit</button>
+            <label id="lineColor">
+                <h2>Line Colour:</h2>
+                <input type="color" name="lineColor">
+            </label>
+            <label id="fileInput">
+                <h2>Select File:</h2>
+                <input type="file" id="upload" accept="image/*">
+                <button id="submit">Submit</button>
+            </label>
         </div>
-        <div id="canvasContainer">
-            <canvas id="canvas"></canvas>
+        <div class="canvases">
+            <div class="canvasContainer">
+                <canvas id="canvas" style="position: absolute; z-index: 0;"></canvas>
+            </div>
+            <div class="canvasContainer">
+                <canvas id="lineCanvas" style="position: absolute; z-index: 1;"></canvas>
+            </div>
         </div>
     </main>
     <footer>
-        <h2>Acknowledgements:</h2>
+        <!-- <h2>Acknowledgements:</h2> -->
     </footer>
 </body>
 

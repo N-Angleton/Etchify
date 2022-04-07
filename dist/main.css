@@ -384,24 +384,6 @@ template {
 [hidden] {
   display: none;
 }
-/*!*****************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/slider.css ***!
-  \*****************************************************************************************************/
-.slider {
-  /* -webkit-appearance: none; */
-  /* Override default CSS styles */
-  appearance: none;
-  width: 30%;
-  /* Full-width */
-  height: 12px;
-  /* Specified height */
-  background: black;
-  /* Grey background */
-  /* outline: none; */
-  /* Remove outline */
-  opacity: 0.5;
-  /* Set transparency (for mouse-over effects on hover) */
-}
 /*!*****************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
   \*****************************************************************************************************************************************/
@@ -419,6 +401,8 @@ header {
   display: inline-block;
   width: 100%;
   margin: 0px;
+  top: 0px;
+  position: relative;
 }
 
 header h1 {
@@ -450,9 +434,46 @@ label {
   margin-right: 8px;
 }
 
-#canvasContainer {
+.canvasContainer {
   display: block;
   width: 80%;
   overflow: scroll;
   height: fit-content;
+}
+
+.canvases {
+  display: block;
+  width: 80%;
+  min-height: 400px;
+  height: fit-content;
+}
+
+.canvas {
+  position: absolute;
+  z-index: 0;
+}
+
+.lineCanvas {
+  position: absolute;
+  z-index: 1;
+}
+
+footer {
+  bottom: 0;
+}
+
+.slider {
+  appearance: none;
+  width: 30%;
+  height: 12px;
+  background: black;
+  opacity: 0.5;
+}
+
+.tooltip-text {
+  visibility: hidden;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
 }
