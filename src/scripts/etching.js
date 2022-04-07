@@ -106,6 +106,7 @@ export class Etching {
   }
 
   drawLine(pixelsBeforeCell, accRed, accGreen, accBlue, rawAcc){
+    
     let avgRed = accRed / this.area
     let avgGreen = accGreen / this.area
     let avgBlue = accBlue / this.area
@@ -163,15 +164,17 @@ export class Etching {
 
   drawCell(pixelsBeforeCell, val){
     if (this.shadingIndex === 0) { this.basicShade(pixelsBeforeCell, val) }
-    else if (this.shadingIndex === 1) { this.veritcalHatching(pixelsBeforeCell, val)}
+    else if (this.shadingIndex === 1) { this.verticalHatching(pixelsBeforeCell, val)}
     else if (this.shadingIndex === 2) { this.horizontalHatching(pixelsBeforeCell, val)}
     else if (this.shadingIndex === 3) {
-      this.veritcalHatching(pixelsBeforeCell, val / 1.8)
-      this.horizontalHatching(pixelsBeforeCell, val / 1.8)
+      
+      this.verticalHatching(pixelsBeforeCell, val)
+      this.horizontalHatching(pixelsBeforeCell, val)
     }
   }
 
-  veritcalHatching(pixelsBeforeCell, val) {
+  verticalHatching(pixelsBeforeCell, val) {
+    
     let numberOfShadings = this.distinctShades * this.unit
     let interval = (256 / (this.unit * this.distinctShades)) / 2
     let shadeValue = numberOfShadings - Math.floor(val / interval)
@@ -209,7 +212,7 @@ export class Etching {
   }
 
   basicShade(pixelsBeforeCell, val) {
-    // debugger
+    debugger
     let ratio = val / 255
     for (let i = 0; i < this.area; i++) {
       let pixelsAboveInCell = Math.floor(i / this.unit) * this.width * 4
@@ -218,8 +221,9 @@ export class Etching {
       this.newData.data[startingPixel] = ratio * this.rgb.red
       this.newData.data[startingPixel + 1] = ratio * this.rgb.green
       this.newData.data[startingPixel + 2] = ratio * this.rgb.blue
-      this.newData.data[startingPixel + 3] = 255
+      this.newData.data[startingPixel + 3] = 255 - val
     }
+    // console.log(this.newData.data)
   }
 
 }

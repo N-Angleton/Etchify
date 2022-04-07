@@ -24,7 +24,7 @@
         <div id="settings">
             <div class="slidecontainer tooltip">
                 <h2>Pixellation:</h2>
-                <span class="tooltip-text">The larger the number, the larger the size each pixel. This means that lower numbers more precisely match the original.</span>
+                <span class="tooltip-text">The larger the number, the larger the size of each pixel. This means that lower numbers more precisely match the original.</span>
                 <br>
                 <input type="range" min="1" max="16" value="3" name="unit" class="slider" oninput="this.nextElementSibling.value = this.value">
                 <output>3</output>
@@ -38,8 +38,8 @@
                 <output>2</output>
             </div>
             <div class="slidecontainer tooltip">
-                <h2>Line sensitivity:</h2>
-                <span class="tooltip-text">Lower numbers will cause fewer lines to be drawn.</span>
+                <h2>Outline sensitivity:</h2>
+                <span class="tooltip-text">The lower the number the more stringent the outline detection.</span>
                 <br>
                 <input type="range" min="1" max="100" value="50" name="lineSensitivity" class="slider"
                     oninput="this.nextElementSibling.value = this.value">
@@ -69,7 +69,7 @@
             </label>
             <label id="lineBool" class="tooltip">
                 <h2>Linework:</h2>
-                <span class="tooltip-text">Toggle whether outlines within the final image are drawn. Lower pixellaton rates that are higher than one work best.</span>
+                <span class="tooltip-text">Toggle whether outlines will be drawn. Lower pixellaton rates that are above one work best.</span>
                 <br>
                 <label>Yes
                     <input type="radio" name="lineBool" value="true">
@@ -80,7 +80,7 @@
             </label>
             <label id="Shading" class="tooltip">
                 <h2>Shading Style:</h2>
-                <span class="tooltip-text">Block shading will render the image in squares of fixed opacity. Vertical hatching will render the image with vertical lines.</span>
+                <span class="tooltip-text">Block shading will render the image in squares of fixed opacity; vertical hatching will render the image with vertical lines; etc.</span>
                 <br>
                 <label>Block
                     <input type="radio" name="shading" value="0">
@@ -103,7 +103,7 @@
             </label>
             <label id="lineColor" class="tooltip">
                 <h2>Line Colour:</h2>
-                <span class="tooltip-text">This is the colour of the outlines.</span>
+                <span class="tooltip-text">This is the colour of the outline.</span>
                 <br>
                 <input type="color" name="lineColor">
             </label>
