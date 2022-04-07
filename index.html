@@ -11,8 +11,9 @@
 </head>
 
 <body>
-    <header>
+    <header class="tooltip">
         <h1>Etchify</h1>
+        <span class="tooltip-text">This website was desgined to allow users to upload images, and transform them into artwork that emulated traditional etchings. By that metric, it has been a mild success. More siginficantly, this website allows the user to experiment with image manipulation along a few fixed parameters. Enjoy.</span>
         <ul id="personalLinks">
             <li><a href="mailto:nick.angleton@gmail.com">Email</a></li>
             <li><a href="https://linkedin.com/in/nhangleton">LinkedIn</a></li>
@@ -23,27 +24,31 @@
         <div id="settings">
             <div class="slidecontainer tooltip">
                 <h2>Pixellation:</h2>
-                <span></span>
-                <div class="tooltip-text">
-                    <p>Pixllation adfasdf</p>
-                </div>
-                <input type="range" min="1" max="10" value="3" name="unit" class="slider" oninput="this.nextElementSibling.value = this.value">
+                <span class="tooltip-text">The larger the number, the larger the size each pixel. This means that lower numbers more precisely match the original.</span>
+                <br>
+                <input type="range" min="1" max="16" value="3" name="unit" class="slider" oninput="this.nextElementSibling.value = this.value">
                 <output>3</output>
             </div>
-            <div class="slidecontainer">
+            <div class="slidecontainer tooltip">
                 <h2>Distinct Shades:</h2>
-                <input type="range" min="1" max="10" value="2" name="shades" class="slider"
+                <span class="tooltip-text">The larger the number of distinct shades, the more accurate the final image will be.</span>
+                <br>
+                <input type="range" min="1" max="16" value="2" name="shades" class="slider"
                     oninput="this.nextElementSibling.value = this.value">
                 <output>2</output>
             </div>
-            <div class="slidecontainer">
+            <div class="slidecontainer tooltip">
                 <h2>Line sensitivity:</h2>
+                <span class="tooltip-text">Lower numbers will cause fewer lines to be drawn.</span>
+                <br>
                 <input type="range" min="1" max="100" value="50" name="lineSensitivity" class="slider"
                     oninput="this.nextElementSibling.value = this.value">
                 <output>50</output>
             </div>
-            <label id="animate">
+            <label id="animate" class="tooltip">
                 <h2>Animate:</h2>
+                <span class="tooltip-text">Will cause the image to be drawn from the top down.</span>
+                <br>
                 <label>Yes
                     <input type="radio" name="animate" value="true" checked>
                 </label>
@@ -51,8 +56,10 @@
                     <input type="radio" name="animate" value="">
                 </label>
             </label>
-            <label id="shadingBool">
+            <label id="shadingBool" class="tooltip">
                 <h2>Shading:</h2>
+                <span class="tooltip-text">Toggle whether shading will be applied.</span>
+                <br>
                 <label>Yes
                     <input type="radio" name="shadeBool" value="true" checked>
                 </label>
@@ -60,8 +67,10 @@
                     <input type="radio" name="shadeBool" value="">
                 </label>
             </label>
-            <label id="lineBool">
+            <label id="lineBool" class="tooltip">
                 <h2>Linework:</h2>
+                <span class="tooltip-text">Toggle whether outlines within the final image are drawn. Lower pixellaton rates that are higher than one work best.</span>
+                <br>
                 <label>Yes
                     <input type="radio" name="lineBool" value="true">
                 </label>
@@ -69,25 +78,39 @@
                     <input type="radio" name="lineBool" value="" checked>
                 </label>
             </label>
-            <label id="Shading">
+            <label id="Shading" class="tooltip">
                 <h2>Shading Style:</h2>
+                <span class="tooltip-text">Block shading will render the image in squares of fixed opacity. Vertical hatching will render the image with vertical lines.</span>
+                <br>
                 <label>Block
                     <input type="radio" name="shading" value="0">
                 </label>
-                <label>Vertical Hashing
-                    <input type="radio" name="shading" value="1" checked>
+                <label>Vertical Hatching
+                    <input type="radio" name="shading" value="1">
+                </label>
+                <label>Horizontal Hatching
+                    <input type="radio" name="shading" value="2" checked>
+                </label>
+                <label>Cross Hatching
+                    <input type="radio" name="shading" value="3">
                 </label>
             </label>
-            <label id="color">
+            <label id="color" class="tooltip">
                 <h2>Shading Colour:</h2>
+                <span class="tooltip-text">This is the colour of the shading, and thus the primary colour in the image.</span>
+                <br>
                 <input type="color" name="shadeColor">
             </label>
-            <label id="lineColor">
+            <label id="lineColor" class="tooltip">
                 <h2>Line Colour:</h2>
+                <span class="tooltip-text">This is the colour of the outlines.</span>
+                <br>
                 <input type="color" name="lineColor">
             </label>
-            <label id="fileInput">
+            <label id="fileInput" class="tooltip">
                 <h2>Select File:</h2>
+                <span class="tooltip-text">Please select an image you would like to etchify.</span>
+                <br>
                 <input type="file" id="upload" accept="image/*">
                 <button id="submit">Submit</button>
             </label>

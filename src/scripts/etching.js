@@ -3,7 +3,7 @@ export class Etching {
     this.unit = parseInt(document.querySelector("input[name='unit']").value);
     this.area = this.unit * this.unit;
 
-    this.lineConstant = parseInt(document.querySelector("input[name='lineSensitivity']").value) / 4
+    this.lineConstant = (101 - parseInt(document.querySelector("input[name='lineSensitivity']").value)) / 4
 
     // this.animate = true
     this.animate = Boolean(document.querySelector("input[name='animate']:checked").value === "true");
@@ -163,10 +163,15 @@ export class Etching {
 
   drawCell(pixelsBeforeCell, val){
     if (this.shadingIndex === 0) { this.basicShade(pixelsBeforeCell, val) }
-    else if (this.shadingIndex === 1) { this.veritcalHash(pixelsBeforeCell, val)}
+    else if (this.shadingIndex === 1) { this.veritcalHatching(pixelsBeforeCell, val)}
+    else if (this.shadingIndex === 2) { this.horizontalHatching(pixelsBeforeCell, val)}
+    else if (this.shadingIndex === 3) {
+      this.veritcalHatching(pixelsBeforeCell, val / 1.8)
+      this.horizontalHatching(pixelsBeforeCell, val / 1.8)
+    }
   }
 
-  veritcalHash(pixelsBeforeCell, val) {
+  veritcalHatching(pixelsBeforeCell, val) {
     let numberOfShadings = this.distinctShades * this.unit
     let interval = (256 / (this.unit * this.distinctShades)) / 2
     let shadeValue = numberOfShadings - Math.floor(val / interval)
@@ -184,7 +189,27 @@ export class Etching {
     }
   }
 
+  horizontalHatching(pixelsBeforeCell, val) {
+    let numberOfShadings = this.distinctShades * this.unit
+    let interval = (256 / (this.unit * this.distinctShades)) / 2
+    let shadeValue = numberOfShadings - Math.floor(val / interval)
+
+    for (let i = 0; i < shadeValue; i++) {
+
+      let pixelsAboveInCell = (i % this.unit) * this.width * 4
+      let startingPixel = pixelsBeforeCell + pixelsAboveInCell
+
+      for (let j = 0; j < this.unit; j++) {
+        this.newData.data[startingPixel + (j * 4)] = this.rgb.red
+        this.newData.data[startingPixel + (j * 4) + 1] = this.rgb.green
+        this.newData.data[startingPixel + (j * 4) + 2] = this.rgb.blue
+        this.newData.data[startingPixel + (j * 4) + 3] += (256 / this.distinctShades)
+      }
+    }
+  }
+
   basicShade(pixelsBeforeCell, val) {
+    // debugger
     let ratio = val / 255
     for (let i = 0; i < this.area; i++) {
       let pixelsAboveInCell = Math.floor(i / this.unit) * this.width * 4

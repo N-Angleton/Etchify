@@ -25,9 +25,14 @@ header {
 }
 
 header h1 {
-  display: block;
+  display: inline-block;
   font-size: 50px;
   margin: 0px;
+}
+
+header span.tooltip-text {
+  width: 70%;
+  float: right;
 }
 
 header ul {
@@ -90,10 +95,18 @@ footer {
   opacity: 0.5;
 }
 
+.tooltip h2 {
+  display: inline-block;
+}
+
 .tooltip-text{
   visibility: hidden;
 }
 
 .tooltip:hover .tooltip-text{
   visibility: visible;
+}
+
+div#settings > label {
+  display: block;
 }
