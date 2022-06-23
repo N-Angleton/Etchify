@@ -5,7 +5,6 @@ export class Etching {
 
     this.lineConstant = (101 - parseInt(document.querySelector("input[name='lineSensitivity']").value)) / 4;
 
-    // this.animate = true
     this.animate = Boolean(document.querySelector("input[name='animate']:checked").value === "true");
     this.animationDelay = 10;
 

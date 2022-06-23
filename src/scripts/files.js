@@ -2,8 +2,8 @@ import { Etching } from "./etching";
 
 export function checkFile(e){
   e.stopPropagation();
-  const file = e.target.files;
-  if (file.length ===1 ) {
+  const files = e.target.files;
+  if (files.length === 1 ) {
     const button = document.getElementById("submit");
     button.addEventListener('click', processFile);
   }
@@ -12,6 +12,6 @@ export function checkFile(e){
 async function processFile(){
   const upload = document.getElementById('upload');
   const file = upload.files[0];
-  const iBP = await createImageBitmap(file);
-  new Etching(iBP);
+  const imageBitMap = await createImageBitmap(file);
+  new Etching(imageBitMap);
 }

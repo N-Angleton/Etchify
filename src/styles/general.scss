@@ -13,7 +13,6 @@ header {
   width: 100%;
   margin: 0px;
   top: 0px;
-  // position: a;
 }
 
 header h1 {
@@ -91,7 +90,8 @@ div#settings > label {
 .canvasContainer::-webkit-scrollbar {
     display: none;
   }
-  .canvasContainer {
-    -ms-overflow-style: none;
-    scrollbar-width: 200px;
-  }
+  
+.canvasContainer {
+  -ms-overflow-style: none;
+  scrollbar-width: 200px;
+}
