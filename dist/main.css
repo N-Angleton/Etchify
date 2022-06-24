@@ -484,3 +484,7 @@ div#settings > label {
   -ms-overflow-style: none;
   scrollbar-width: 200px;
 }
+
+#originalCanvas {
+  display: none;
+}

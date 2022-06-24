@@ -13,43 +13,17 @@
 <body>
     <header class="tooltip">
         <h1>Etchify</h1>
-        <span class="tooltip-text">The original purpose of this website was to allow users to upload images, and transform them into artwork that emulates traditional etchings--thus the name. By that metric, it is a mild success. More siginficantly, this website allows the user to experiment with image manipulation along a few fixed parameters. Enjoy.</span>
-        <br>
-        <ul id="personalLinks">
-            <li><a href="mailto:nick.angleton@gmail.com">Email</a></li>
-            <li><a href="https://linkedin.com/in/nhangleton">LinkedIn</a></li>
-            <li><a href="https://github.com/N-Angleton">Github</a></li>
-        </ul>
     </header>
     <main>
         <div id="settings">
             <div class="slidecontainer tooltip">
-                <h2>Pixellation:</h2>
-                <span class="tooltip-text">The larger the number, the larger the size of each pixel. This means that lower numbers more precisely match the original.</span>
-                <br>
-                <input type="range" min="1" max="16" value="3" name="unit" class="slider" oninput="this.nextElementSibling.value = this.value">
-                <output>3</output>
-            </div>
-            <div class="slidecontainer tooltip">
-                <h2>Distinct Shades:</h2>
-                <span class="tooltip-text">The larger the number of distinct shades, the more accurate the final image will be.</span>
-                <br>
-                <input type="range" min="1" max="16" value="2" name="shades" class="slider"
-                    oninput="this.nextElementSibling.value = this.value">
-                <output>2</output>
-            </div>
-            <div class="slidecontainer tooltip">
                 <h2>Outline sensitivity:</h2>
-                <span class="tooltip-text">The lower the number the more stringent the outline detection.</span>
-                <br>
-                <input type="range" min="1" max="100" value="50" name="lineSensitivity" class="slider"
+                <input type="range" min="0" max="756" value="64" name="lineSensitivity" class="slider"
                     oninput="this.nextElementSibling.value = this.value">
-                <output>50</output>
+                <output>64</output>
             </div>
             <label id="animate" class="tooltip">
                 <h2>Animate:</h2>
-                <span class="tooltip-text">Will cause the image to be drawn from the top down.</span>
-                <br>
                 <label>Yes
                     <input type="radio" name="animate" value="true" checked>
                 </label>
@@ -59,59 +33,32 @@
             </label>
             <label id="shadingBool" class="tooltip">
                 <h2>Shading:</h2>
-                <span class="tooltip-text">Toggle whether shading will be applied.</span>
-                <br>
                 <label>Yes
-                    <input type="radio" name="shadeBool" value="true" checked>
+                    <input type="radio" name="shadeBoolean" value="true" checked>
                 </label>
                 <label>No
-                    <input type="radio" name="shadeBool" value="">
+                    <input type="radio" name="shadeBoolean" value="">
                 </label>
             </label>
             <label id="lineBool" class="tooltip">
                 <h2>Linework:</h2>
-                <span class="tooltip-text">Toggle whether outlines will be drawn. Lower pixellaton rates that are above one work best.</span>
-                <br>
                 <label>Yes
-                    <input type="radio" name="lineBool" value="true">
+                    <input type="radio" name="lineBoolean" value="true">
                 </label>
                 <label>No
-                    <input type="radio" name="lineBool" value="" checked>
-                </label>
-            </label>
-            <label id="Shading" class="tooltip">
-                <h2>Shading Style:</h2>
-                <span class="tooltip-text">Block shading will render the image in squares of fixed opacity; vertical hatching will render the image with vertical lines; etc.</span>
-                <br>
-                <label>Block
-                    <input type="radio" name="shading" value="0">
-                </label>
-                <label>Vertical Hatching
-                    <input type="radio" name="shading" value="1">
-                </label>
-                <label>Horizontal Hatching
-                    <input type="radio" name="shading" value="2" checked>
-                </label>
-                <label>Cross Hatching
-                    <input type="radio" name="shading" value="3">
+                    <input type="radio" name="lineBoolean" value="" checked>
                 </label>
             </label>
             <label id="color" class="tooltip">
                 <h2>Shading Colour:</h2>
-                <span class="tooltip-text">This is the colour of the shading, and thus the primary colour in the image.</span>
-                <br>
                 <input type="color" name="shadeColor">
             </label>
             <label id="lineColor" class="tooltip">
                 <h2>Line Colour:</h2>
-                <span class="tooltip-text">This is the colour of the outline.</span>
-                <br>
                 <input type="color" name="lineColor">
             </label>
             <label id="fileInput" class="tooltip">
                 <h2>Select File:</h2>
-                <span class="tooltip-text">Please select an image you would like to etchify.</span>
-                <br>
                 <input type="file" id="upload" accept="image/*">
                 <button id="submit">Submit</button>
             </label>
