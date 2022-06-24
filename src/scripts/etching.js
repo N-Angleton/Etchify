@@ -72,85 +72,41 @@ export class Etching {
     this.regions = {}
     this.pixels = {}
 
-    this.processFirstPixel()
-    this.processRestOfFirstRow()
-    this.processOtherRows()
-  }
-
-  processFirstPixel(){
-    let firstPixelColors = this.retrievePixelColors(0)
-    let firstPixelDarkness = this.calculateDarkness(firstPixelColors)
-    this.regions[0] = new Region(0, firstPixelDarkness, 0, 0)
-    this.pixels[0] = new Pixel(0, firstPixelColors, false)
-  }
-
-  processRestOfFirstRow(){
-    for (let index = 1; index < this.width; index++) {
-      let previousPixel = this.pixels[index - 1]
-      let currentPixelColors = this.retrievePixelColors(index)
-      let currentPixelDarkness = this.calculateDarkness(currentPixelColors)
-      let difference = this.calculateColorDifference(currentPixelColors, previousPixel.colors)
-
-      if (difference < this.lineSensitivity) {
-        let sharedRegion = previousPixel.region
-        this.regions[sharedRegion].addPixel(index, currentPixelDarkness, 0, index)
-        this.pixels[index] = new Pixel(sharedRegion, currentPixelColors, false)
-      } else {
-        previousPixel.line = true
-        this.regions[index] = new Region(index, currentPixelDarkness, 0, index)
-        this.pixels[index] = new Pixel(index, currentPixelColors, true)
-      }
-    }
-  }
-
-  processOtherRows(){
-    for (let row = 1; row < this.height; row++) {
+    for (let row = 0; row < this.height; row++) {
       for (let column = 0; column < this.width; column++) {
+        let currentIndex = this.pixelIndex(row, column)
+        let currentRGB = this.retrievePixelRGB(currentIndex)
+        let currentDarkness = this.calculateDarkness(currentRGB)
 
-        let index = this.pixelIndex(row, column)
-        let currentColors = this.retrievePixelColors(index)
-        let currentDarkness = this.calculateDarkness(currentColors)
-        let neighboringPixels = this.getNeighboringPixels(row, column)
-
-        let minDifference = this.lineSensitivity
-        let tempPixels = []
-        let regionId = null
+        let neighboringPixels = this.retrieveNeighboringPixels(row, column)
         let line = false
 
-        neighboringPixels.forEach( pixel => {
-          let pixelIndex = pixel[2]
-          let candidateRegion = this.pixels[pixelIndex].region
-          let colorDifference = this.calculateColorDifference(currentColors, this.retrievePixelColors(pixelIndex))
+        // console.log(`Outside column: ${column}`)
 
-          if (candidateRegion === regionId) {
-            minDifference = Math.min(colorDifference, minDifference)
-            tempPixels.push(pixelIndex)
-          } else {
-            if (colorDifference < minDifference) {
+        let regionId = neighboringPixels.reduce( (smallestDifference, neighborIndex) => {
+          let neighbor = this.pixels[neighborIndex]
+          // debugger
+          // console.log(`Inside column: ${column}`)
+          let neighborRGB = neighbor.colors
+          let colorDifference = this.calculateColorDifference(currentRGB, neighborRGB)
+          if (colorDifference < smallestDifference[0]) return [colorDifference, neighbor.region]
+          return smallestDifference
+        }, [this.lineSensitivity, null])[1]
 
-              regionId = candidateRegion
-              minDifference = colorDifference
-              if (tempPixels.length) {
-                line = true
-                tempPixels.forEach( linePixel => this.pixels[linePixel].line = true)
-              }
-              tempPixels = [pixelIndex]
+        let otherRegionPixels = neighboringPixels.filter( neighborIndex => this.pixels[neighborIndex].region !== regionId)
 
-            } else {
-              this.pixels[pixelIndex].line = true
-              line = true
-            }
-          }
-        })
-
-        if (!regionId) {
-          this.regions[index] = new Region(index, currentDarkness, row, column)
-          regionId = index
-        } else {
-          this.regions[regionId].addPixel(index, currentDarkness, row, column)
+        if (otherRegionPixels.length) {
+          line = true
+          otherRegionPixels.forEach( linePixelIndex => this.pixels[linePixelIndex].line = true)
         }
 
-        this.pixels[index] = new Pixel(regionId, currentColors, line)
+        if (regionId) {
+          this.regions[regionId].addPixel(currentIndex, currentDarkness, row, column)
+        } else {
+          regionId = currentIndex
+          this.regions[regionId] = new Region(currentIndex, currentDarkness, row, column)
+        }
+        this.pixels[currentIndex] = new Pixel(regionId, currentRGB, line)
       }
     }
   }
@@ -172,13 +128,13 @@ export class Etching {
     return ((row * this.width) + column)
   }
 
-  retrievePixelColors(index){
-    const colors = []
+  retrievePixelRGB(index){
+    const rgb = []
     const precedingRGBvalues = 4 * index
-    colors.push(this.originalData.data[precedingRGBvalues])
-    colors.push(this.originalData.data[precedingRGBvalues + 1])
-    colors.push(this.originalData.data[precedingRGBvalues + 2])
-    return colors
+    rgb.push(this.originalData.data[precedingRGBvalues])
+    rgb.push(this.originalData.data[precedingRGBvalues + 1])
+    rgb.push(this.originalData.data[precedingRGBvalues + 2])
+    return rgb
   }
 
   calculateColorDifference(rgb1, rgb2){
@@ -199,17 +155,16 @@ export class Etching {
     return opacity
   }
 
-  getNeighboringPixels(row, column){
+  retrieveNeighboringPixels(row, column){
     const neighbors = []
 
-    if (column > 0) {
-      neighbors.push([row, column - 1, this.pixelIndex(row, column - 1)])
-      neighbors.push([row - 1, column - 1, this.pixelIndex(row - 1, column - 1)])
+    if (column > 0) neighbors.push(this.pixelIndex(row, column - 1))
+
+    if (row > 0) {
+      if (column > 0) neighbors.push(this.pixelIndex(row - 1, column - 1))
+      neighbors.push(this.pixelIndex(row - 1, column))
+      if (column < this.width - 1) neighbors.push(this.pixelIndex(row - 1, column + 1))
     }
-
-    neighbors.push([row - 1, column, this.pixelIndex(row - 1, column)])
-
-    if (column < this.width - 1) neighbors.push([row - 1, column + 1, this.pixelIndex(row - 1, column + 1)])
     
     return neighbors
   }
