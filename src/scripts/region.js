@@ -14,7 +14,7 @@ export class Region {
     }
 
     addPixel(pixelIndex, opacity, row, column){
-        this.pixels.push(pixelIndex)
+        this.pixels.push(pixelIndex);
         this.cumulativeOpacity += opacity
 
         if (column < this.minX) this.minX = column

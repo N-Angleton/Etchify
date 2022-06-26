@@ -35,6 +35,8 @@ export class Etching {
 
     const horizontalRatio = bitMap.width / 1080
     const verticalRatio = bitMap.height / 1350
+    // const horizontalRatio = bitMap.width / 800
+    // const verticalRatio = bitMap.height / 800
     let ratio = Math.max(horizontalRatio, verticalRatio)
 
     if (ratio > 1) {
@@ -70,7 +72,8 @@ export class Etching {
 
   processImage(){
     this.regions = {}
-    this.pixels = {}
+    this.allPixels = {}
+    let self = this
 
     for (let row = 0; row < this.height; row++) {
       for (let column = 0; column < this.width; column++) {
@@ -81,46 +84,77 @@ export class Etching {
         let neighboringPixels = this.retrieveNeighboringPixels(row, column)
         let line = false
 
-        // console.log(`Outside column: ${column}`)
+        let regionId = null
+        let matchingRegions = []
+        let neighboringLines = []
 
-        let regionId = neighboringPixels.reduce( (smallestDifference, neighborIndex) => {
-          let neighbor = this.pixels[neighborIndex]
-          // debugger
-          // console.log(`Inside column: ${column}`)
+        neighboringPixels.forEach( neighborIndex => {
+          let neighbor = this.allPixels[neighborIndex]
           let neighborRGB = neighbor.colors
-          let colorDifference = this.calculateColorDifference(currentRGB, neighborRGB)
-          if (colorDifference < smallestDifference[0]) return [colorDifference, neighbor.region]
-          return smallestDifference
-        }, [this.lineSensitivity, null])[1]
+          let colorDifference = this.calculateColorDifference(currentRGB, neighborRGB);
+          (colorDifference < this.lineSensitivity) ? matchingRegions.push(neighbor.region) : neighboringLines.push(neighborIndex)
+        })
 
-        let otherRegionPixels = neighboringPixels.filter( neighborIndex => this.pixels[neighborIndex].region !== regionId)
-
-        if (otherRegionPixels.length) {
+        if (neighboringLines.length) {
           line = true
-          otherRegionPixels.forEach( linePixelIndex => this.pixels[linePixelIndex].line = true)
+          neighboringLines.forEach( linePixelIndex => this.allPixels[linePixelIndex].line = true)
+        }
+
+        if (matchingRegions.length) {
+          regionId = (matchingRegions.length === 1) ? matchingRegions[0] : this.mergeRegions(matchingRegions)
         }
 
         if (regionId) {
-          this.regions[regionId].addPixel(currentIndex, currentDarkness, row, column)
+          self.regions[regionId].addPixel(currentIndex, currentDarkness, row, column)
         } else {
           regionId = currentIndex
-          this.regions[regionId] = new Region(currentIndex, currentDarkness, row, column)
+          self.regions[regionId] = new Region(currentIndex, currentDarkness, row, column)
         }
-        this.pixels[currentIndex] = new Pixel(regionId, currentRGB, line)
+        self.allPixels[currentIndex] = new Pixel(regionId, currentRGB, line)
       }
     }
   }
 
+  mergeRegions(matchingRegions){
+    let largestRegionId = matchingRegions.reduce( (currentLargestRegionId, candidateId) => {
+      let currentLength = this.regions[currentLargestRegionId].pixels.length
+      let candidateLength = this.regions[candidateId].pixels.length
+      return (candidateLength > currentLength) ? candidateId : currentLargestRegionId
+    })
+    let largestRegion = this.regions[largestRegionId]
+    let otherRegions = matchingRegions.filter( regionId => regionId !== largestRegionId)
+    let uniqueOtherRegions = []
+    otherRegions.forEach( regionId => {
+      if (!(uniqueOtherRegions.includes(regionId))) uniqueOtherRegions.push(regionId)
+    })
+    uniqueOtherRegions.forEach( regionId => {
+      let region = this.regions[regionId]
+      let regionPixels = region.pixels
+      let largestRegionPixels = largestRegion.pixels
+      largestRegion.pixels = largestRegionPixels.concat(regionPixels)
+      largestRegion.cumulativeOpacity += region.cumulativeOpacity
+
+      if (region.minX < largestRegion.minX) largestRegion.minX = region.minX
+      if (region.maxX > largestRegion.maxX) largestRegion.maxX = region.maxX
+      if (region.minY < largestRegion.minY) largestRegion.minY = region.minY
+      if (region.maxY > largestRegion.maxY) largestRegion.maxY = region.maxY
+
+      region.pixels.forEach( pixelId => this.allPixels[pixelId].region = largestRegionId)
+      delete this.regions[regionId]
+    })
+    return largestRegionId
+  }
+
   drawLines(){
+    let linePixels = []
     for (let i = 0; i < 4 * this.numberOfPixels; i += 4) {
-      if (!(this.pixels[i / 4].line)) {
+      if (!(this.allPixels[i / 4].line)) {
         this.lineData.data[i] = 255
         this.lineData.data[i + 1] = 255
         this.lineData.data[i + 2] = 255
-      }
+      } else { linePixels.push(i) }
       this.lineData.data[i + 3] = 255
     }
-
     this.lineCtx.putImageData(this.lineData, 0, 0)
   }
 
@@ -163,7 +197,7 @@ export class Etching {
     if (row > 0) {
       if (column > 0) neighbors.push(this.pixelIndex(row - 1, column - 1))
       neighbors.push(this.pixelIndex(row - 1, column))
-      if (column < this.width - 1) neighbors.push(this.pixelIndex(row - 1, column + 1))
+      if (column < (this.width - 1)) neighbors.push(this.pixelIndex(row - 1, column + 1))
     }
     
     return neighbors
