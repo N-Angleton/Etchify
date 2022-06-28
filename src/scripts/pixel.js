@@ -4,6 +4,7 @@ export class Pixel {
         this.colors = colors
         this.darkness = darkness
         this.neighbors = []
+        this.lineBool = false
     }
 
     line(colorDiffThreshold, percentOfPixels){
@@ -15,7 +16,8 @@ export class Pixel {
             hypotheticalMax += weight
             if (colorDifference >= colorDiffThreshold) weightedNumberOfLine += weight
         })
-        return Boolean((weightedNumberOfLine / hypotheticalMax) > percentOfPixels)
+        this.line = Boolean((weightedNumberOfLine / hypotheticalMax) > percentOfPixels)
+        return this.lineBool
     }
 
     static addColorDifference(pixel1, pixel2, colorDifference, weight) {

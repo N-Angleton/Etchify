@@ -101,19 +101,58 @@ export class Etching {
   }
 
   drawLines(){
-    for (let i = 0; i < 4 * this.numberOfPixels; i += 4) {
+    this.unrefinedLinePixels = {}
+    for (let i = 0; i < this.numberOfPixels * 4; i += 4) {
       if (!(this.pixels[i / 4].line(this.lineSensitivity, this.neighborRequirement))) {
         this.lineData.data[i] = 255
         this.lineData.data[i + 1] = 255
         this.lineData.data[i + 2] = 255
-      }
+      } else {this.unrefinedLinePixels[i / 4] = false}
       this.lineData.data[i + 3] = 255
     }
     this.lineCtx.putImageData(this.lineData, 0, 0)
   }
 
+  refineLinePixels(){
+    console.log('in refine')
+    this.refinedLinePixels = {}
+    this.lineComplexes = []
+    Object.keys(this.unrefinedLinePixels).forEach( lineIndex => {
+      if (!this.unrefinedLinePixels[lineIndex]) {
+        let unconsideredPixels = [lineIndex]
+        let newComplex = []
+        while (unconsideredPixels.length) {
+          let nextPixel = unconsideredPixels.pop()
+          newComplex.push(nextPixel)
+          this.unrefinedLinePixels[lineIndex] = true
+          let neighboringLines = this.neighboringLines(nextPixel)
+          neighboringLines.forEach( neighboringLineIndex => {
+            if (!(newComplex.includes(neighboringLineIndex) || unconsideredPixels.includes(neighboringLineIndex))) {
+              unconsideredPixels.push(neighboringLineIndex)
+            }
+          })
+        }
+        this.lineComplexes.push(newComplex)
+      }
+    })
+    let tooSmallComplexes = this.lineComplexes.filter( lineComplex => lineComplex.length < 3)
+    tooSmallComplexes.forEach( complex => {
+      complex.forEach( pixel => {
+        let index = pixel * 4
+        this.lineData.data[index] = 255
+        this.lineData.data[index + 1] = 255
+        this.lineData.data[index + 2] = 255
+      })
+    })
+    this.lineCtx.putImageData(this.lineData, 0, 0)
+  }
+
   pixelIndex(row, column){
     return ((row * this.width) + column)
+  }
+
+  rowColumnIndex(index){
+    return [Math.floor(index / this.width), index % this.width]
   }
 
   retrievePixelRGB(index){
@@ -176,6 +215,30 @@ export class Etching {
     }
     
     return neighbors
+  }
+
+  neighboringLines(index){
+    let neighboringLines = []
+    const [row, column] = this.rowColumnIndex(index)
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        if ((i === 0 && j === 0) && rowColumnIsValid(row + i, column + j)) {
+          let index = this.pixelIndex(row + i, column + j)
+          if (this.pixels[index].line) {
+            neighboringLines.push(index)
+          }
+        }
+      }
+    }
+    return neighboringLines
+  }
+
+  rowColumnIsValid(row, column){
+    if (row < 0) return false
+    if (row > this.height - 1) return false
+    if (column < 0) return false
+    if (column > this.width - 1) return false
+    return true
   }
 
 }
