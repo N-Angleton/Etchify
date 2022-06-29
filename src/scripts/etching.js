@@ -1,5 +1,4 @@
 import { Pixel } from "./pixel";
-import { Region } from "./region";
 
 export class Etching {
   
@@ -8,7 +7,10 @@ export class Etching {
     this.calculateDimensions(bitMap);
     this.createCanvasesAndData(bitMap);
     if (this.unprocessed) this.processImage()
-    if (this.line) this.drawLines();
+    if (this.line) {
+      this.drawLines();
+      this.refineLinePixels()
+    }
     // if (this.shade) this.shade();
   }
 
@@ -101,32 +103,33 @@ export class Etching {
   }
 
   drawLines(){
-    this.unrefinedLinePixels = {}
+    console.log('start of draw lines')
+    this.unrefinedLinePixels = []
     for (let i = 0; i < this.numberOfPixels * 4; i += 4) {
       if (!(this.pixels[i / 4].line(this.lineSensitivity, this.neighborRequirement))) {
         this.lineData.data[i] = 255
         this.lineData.data[i + 1] = 255
         this.lineData.data[i + 2] = 255
-      } else {this.unrefinedLinePixels[i / 4] = false}
+      } else {this.unrefinedLinePixels.push(i / 4)}
       this.lineData.data[i + 3] = 255
     }
     this.lineCtx.putImageData(this.lineData, 0, 0)
+    console.log('here')
   }
 
   refineLinePixels(){
     console.log('in refine')
-    this.refinedLinePixels = {}
     this.lineComplexes = []
-    Object.keys(this.unrefinedLinePixels).forEach( lineIndex => {
-      if (!this.unrefinedLinePixels[lineIndex]) {
+    this.unrefinedLinePixels.forEach( lineIndex => {
+      if (!(this.pixels[lineIndex].checked)) {
         let unconsideredPixels = [lineIndex]
         let newComplex = []
         while (unconsideredPixels.length) {
           let nextPixel = unconsideredPixels.pop()
           newComplex.push(nextPixel)
-          this.unrefinedLinePixels[lineIndex] = true
-          let neighboringLines = this.neighboringLines(nextPixel)
-          neighboringLines.forEach( neighboringLineIndex => {
+          this.pixels[nextPixel].checked = true
+          let neighbors = this.neighboringLines(nextPixel)
+          neighbors.forEach( neighboringLineIndex => {
             if (!(newComplex.includes(neighboringLineIndex) || unconsideredPixels.includes(neighboringLineIndex))) {
               unconsideredPixels.push(neighboringLineIndex)
             }
@@ -135,7 +138,7 @@ export class Etching {
         this.lineComplexes.push(newComplex)
       }
     })
-    let tooSmallComplexes = this.lineComplexes.filter( lineComplex => lineComplex.length < 3)
+    let tooSmallComplexes = this.lineComplexes.filter( lineComplex => lineComplex.length < 10)
     tooSmallComplexes.forEach( complex => {
       complex.forEach( pixel => {
         let index = pixel * 4
@@ -145,6 +148,7 @@ export class Etching {
       })
     })
     this.lineCtx.putImageData(this.lineData, 0, 0)
+    console.log('finished refining')
   }
 
   pixelIndex(row, column){
@@ -222,9 +226,9 @@ export class Etching {
     const [row, column] = this.rowColumnIndex(index)
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
-        if ((i === 0 && j === 0) && rowColumnIsValid(row + i, column + j)) {
+        if ((i !== 0 || j !== 0) && this.rowColumnIsValid(row + i, column + j)) {
           let index = this.pixelIndex(row + i, column + j)
-          if (this.pixels[index].line) {
+          if (this.pixels[index].lineBool) {
             neighboringLines.push(index)
           }
         }
