@@ -34,5 +34,9 @@
     "sass-loader": "^12.6.0",
     "webpack": "^5.71.0",
     "webpack-cli": "^4.9.2"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "ttf-loader": "^1.0.2"
   }
 }

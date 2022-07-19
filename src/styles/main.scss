@@ -1,0 +1,30 @@
+main {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    opacity: 1;
+
+    animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.step {
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}

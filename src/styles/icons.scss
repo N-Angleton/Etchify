@@ -1,0 +1,45 @@
+.title i {
+    position: relative;
+}
+
+#shadeIcon::after {
+    content: "Shading ";
+    font-family: 'FellEnglish', serif;
+    opacity: 0;
+    background-color: rgba($color: $bg-color, $alpha: .9);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#outlineIcon::after {
+    content: "test";
+    font-family: 'FellEnglish', serif;
+    opacity: 0;
+    background-color: rgba($color: $bg-color, $alpha: .9);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#refineIcon::after {
+    content: "test";
+    font-family: 'FellEnglish', serif;
+    opacity: 0;
+    background-color: rgba($color: $bg-color, $alpha: .9);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#shadeIcon:hover::after,
+#shadeIcon:focus::after,
+#outlineIcon:hover::after,
+#outlineIcon:focus::after,
+#refineIcon:hover::after,
+#refineIcon:focus::after {
+    opacity: 1;
+}

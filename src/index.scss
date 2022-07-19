@@ -1,3 +1,19 @@
-@import './styles/normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
-@import './styles/general.scss';
+$fa-font-path: '../src/assets/fonts/webfonts';
+@import './styles/font_awesome/fontawesome.scss';
+@import './styles/font_awesome/solid.scss';
+@import './styles/font_awesome/brands.scss';
+@import './styles/font_awesome/regular.scss';
+
+@import './styles/normalize.scss';
+
+@import './styles/structure_and_fonts.scss';
+@import './styles/header.scss';
+@import './styles/main.scss';
+@import './styles/file.scss';
+@import './styles/radio.scss';
+@import './styles/color.scss';
+@import './styles/advanced_settings.scss';
+@import './styles/sub_settings.scss';
+@import './styles/icons.scss';
+@import './styles/enjoy.scss';
+@import './styles/canvas.scss';

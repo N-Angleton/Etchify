@@ -1,0 +1,55 @@
+.toggleSettingCheckbox {
+    pointer-events: none;
+    display: inline-block;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.toggleSettingLabel {
+    display: inline-block;
+}
+
+.toggleSettingLabel::before{
+    pointer-events: all;
+    content: "Off";
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: .75em;
+    margin-left: 1em;
+    font-size: 1em;
+    padding: .375em;
+    border-radius: .5em;
+    outline: 2px solid black;
+    transition: all 1s;
+    height: fit-content;
+    width: 2em;
+    text-align: center;
+    justify-content: center;
+}
+
+.toggleSettingCheckbox:checked + .toggleSettingLabel::before{
+    content: "On";
+    color: $bg-color;
+    background-color: black;
+}
+
+.innerSettingContainer {
+    opacity: 0;
+    transition: all 1s;
+}
+
+.toggleSettingCheckbox:checked ~ .innerSettingContainer {
+    opacity: 1;
+}
+
+.title {
+    display: inline-block;
+    width: fit-content;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-top: 2rem;
+    background: linear-gradient(to right, $bg-color 0%, black 50%, $bg-color 100%) no-repeat 100% 100% / 100% 3px
+}

@@ -1,0 +1,94 @@
+header {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    text-align: center;
+
+    padding: 1.5rem;
+
+    --percent: 70%;
+
+    color: black;
+
+    background:
+        linear-gradient(to top, black 0%, calc(.25 * var(--percent, 0%)), $bg-color var(--percent, 0%)) no-repeat 100% 0% / 4px 100%,
+        linear-gradient(to left, black 0%, calc(.25 * var(--percent, 0%)), $bg-color var(--percent, 0%)) no-repeat 0% 100% / 100% 4px,
+        linear-gradient(to bottom, black 0%, calc(.25 * var(--percent, 0%)), $bg-color var(--percent, 0%)) no-repeat 0% 0% / 4px 100%,
+        linear-gradient(to right, black 0%, calc(.25 * var(--percent, 0%)), $bg-color var(--percent, 0%)) no-repeat 0% 0% / 100% 4px;
+
+    outline: 4px solid;
+    outline-color: transparent;
+    outline-offset: -4px;
+    animation: fadeInBorder 3s, fadeInColor 3s;
+    // transition: outline-color 1s;
+}
+
+@keyframes fadeInBorder {
+    0% {
+        outline-color: $bg-color;
+    }
+    100% {
+        outline-color: transparent;
+    }
+}
+
+@keyframes fadeInColor {
+    0% {
+        color: $bg-color;
+    }
+    25% {
+        color: $bg-color;
+    }
+    100% {
+        color: black;
+    }
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.divider {
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: auto;
+    height: 3px;
+    opacity: 1;
+    background: linear-gradient(to right, $bg-color 10%, black 50%, $bg-color 90%) no-repeat 0% 0% / 100% 3px;
+    animation: fadeInOpacity 3s;
+}
+
+a {
+    margin-left: .5rem;
+    margin-right: .5rem;
+    margin-bottom: 0;
+    outline: 0;
+}
+
+.icons {
+    margin: 0 auto;
+    width: auto;
+    animation: fadeInColor 3s;
+}
+
+i {
+    color: black;
+    font-size: 2rem;
+    padding-bottom: 3px;
+    border-bottom: 4px solid $bg-color;
+    transition: border-bottom 500ms;
+}
+
+a:focus i,
+a:focus-within i,
+a:hover i {
+    border-bottom: 4px solid black;
+}

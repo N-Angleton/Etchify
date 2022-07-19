@@ -1,0 +1,71 @@
+.toggleAdvancedSettings {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.toggleHideSettings {
+    pointer-events: none;
+}
+
+.toggleHideSettings::before{
+    pointer-events: all;
+    content: "Show";
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    padding: .375rem;
+    border-radius: .5rem;
+    border: 4px solid $bg-color;
+    outline: 2px solid black;
+    transition: all 1s;
+    height: fit-content;
+    width: 5rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.toggleHideSettings:hover::before,
+.toggleHideSettings:focus::before {
+    border: 4px solid black;
+}
+
+
+.toggleAdvancedSettings:checked + .toggleHideSettings::before {
+    content: "Hide";
+    color: $bg-color;
+    border: 4px solid black;
+    background-color: black;
+}
+
+.toggleAdvancedSettings:checked + .toggleHideSettings:hover::before,
+.toggleAdvancedSettings:checked + .toggleHideSettings:focus::before {
+    border: 4px solid $bg-color;
+}
+
+.advancedSettingsContainer {
+    display: none;
+}
+
+.toggleAdvancedSettings:checked ~ .advancedSettingsContainer {
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.advancedSettingsContainer i {
+    font-size: 1rem;
+    transform: translateY(-.5em);
+    color: rgb(96, 96, 96);
+}
+
+input[type="range"] {
+    accent-color: black;
+}

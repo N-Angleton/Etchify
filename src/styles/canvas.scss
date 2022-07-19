@@ -1,0 +1,33 @@
+.canvasContainer {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    justify-items: center;
+    align-items: center;
+}
+
+.originalCanvas {
+    display: none;
+}
+
+.shadeCanvas {
+    position: absolute;
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 5em;
+}
+
+.lineCanvas {
+    position: absolute;
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 5em;
+}

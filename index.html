@@ -1,81 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./dist/main.css" />
-    <script src="./dist/main.js"></script>
-    <title>Etchify</title>
-</head>
-
-<body>
-    <header class="tooltip">
-        <h1>Etchify</h1>
-    </header>
-    <main>
-        <div id="settings">
-            <div class="slidecontainer tooltip">
-                <h2>Outline sensitivity:</h2>
-                <input type="range" min="0" max="766" value="64" name="lineSensitivity" class="slider"
-                    oninput="this.nextElementSibling.value = this.value">
-                <output>64</output>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="./dist/main.css" />
+        <script src="./dist/main.js"></script>
+        <title>Etchify</title>
+    </head>
+    <body>
+        <header>
+            <h1>Etchify</h1>
+            <div class="divider"></div>
+            <h2>Created by Nicholas Angleton</h2>
+            <div class="icons">
+                <a href="https://linkedin.com/in/nhangleton"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:nick.angleton@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/N-Angleton"><i class="fa-brands fa-github-square"></i></a>
             </div>
-            <div class="slidecontainer tooltip">
-                <h2>Percent of neighbors:</h2>
-                <input type="range" min="0" max="100" value="40" name="neighborRequirement" class="slider"
-                    oninput="this.nextElementSibling.value = this.value">
-                <output>40</output>
+        </header>
+        <main>
+            <div class="step step1">
+                <h2>Step One: Upload an image</h2>
+                <input type="file" id="upload" class="fileInput" accept="image/*">
+                <label id="fileInputContainer" for="upload" class="fileInputContainer">Choose File</label>
             </div>
-            <label id="animate" class="tooltip">
-                <h2>Animate:</h2>
-                <label>Yes
-                    <input type="radio" name="animate" value="true" checked>
-                </label>
-                <label>No
-                    <input type="radio" name="animate" value="">
-                </label>
-            </label>
-            <label id="shadingBool" class="tooltip">
-                <h2>Shading:</h2>
-                <label>Yes
-                    <input type="radio" name="shadeBoolean" value="true" checked>
-                </label>
-                <label>No
-                    <input type="radio" name="shadeBoolean" value="">
-                </label>
-            </label>
-            <label id="lineBool" class="tooltip">
-                <h2>Linework:</h2>
-                <label>Yes
-                    <input type="radio" name="lineBoolean" value="true" checked>
-                </label>
-                <label>No
-                    <input type="radio" name="lineBoolean" value="">
-                </label>
-            </label>
-            <label id="color" class="tooltip">
-                <h2>Shading Colour:</h2>
-                <input type="color" name="shadeColor">
-            </label>
-            <label id="lineColor" class="tooltip">
-                <h2>Line Colour:</h2>
-                <input type="color" name="lineColor">
-            </label>
-            <label id="fileInput" class="tooltip">
-                <h2>Select File:</h2>
-                <input type="file" id="upload" accept="image/*">
-                <button id="submit">Submit</button>
-            </label>
-        </div>
-        <br>
+            <div class="step step2">
+                <h2>Step Two: Select a style</h2>
+                <div class="styleSelection radioContainer">
+                    <input type="radio" class="radio style" id="style1" name="style" value="shade">
+                    <label class="radioLabel" for="style1">Shade</label>
+                    <input type="radio" class="radio style" id="style2" name="style" value="line">
+                    <label class="radioLabel" for="style2">Outline</label>
+                    <input type="radio" class="radio style" id="style3" name="style" value="shade&line">
+                    <label class="radioLabel" for="style3">Shade &amp; Outline</label>
+                    <input type="radio" class="radio style" id="style4" name="style" value="silhouette">
+                    <label class="radioLabel" for="style4">Silhouette</label>
+                </div>
+            </div>
+            <div class="step step3">
+                <h2>Step Three: Select a color</h2>
+                <div class="colorSelection radioContainer">
+                    <input type="radio" class="radio color" id="black"
+                    data-red="0" data-green="0" data-blue="0" data-color="#000000" name="color" value="black">
+                    <label class="radioLabel black" for="black">Black</label>
+                    <input type="radio" class="radio color" id="red"
+                    data-red="194" data-green="24" data-blue="7" data-color="#C21807" name="color" value="red">
+                    <label class="radioLabel red" for="red">Red</label>
+                    <input type="radio" class="radio color" id="green"
+                    data-red="11" data-green="102" data-blue="35" data-color="#0B6623" name="color" value="green">
+                    <label class="radioLabel green" for="green">Green</label>
+                    <input type="radio" class="radio color" id="blue"
+                    data-red="15" data-green="82" data-blue="186" data-color="#0F52BA" name="color" value="blue">
+                    <label class="radioLabel blue" for="blue">Blue</label>
+                </div>
+            </div>
+            <div class="step step4">
+                <h2>Step Four (Optional): Advanced Settings</h2>
+                <input type="checkbox" id="toggleAdvancedSettings" class="toggleAdvancedSettings">
+                <label class="toggleHideSettings" for="toggleAdvancedSettings"></label>
+                <div class="advancedSettingsContainer">
+                    <div class="outerSettingContainer">
+                        <h3 class="title">Shade <i id="shadeIcon" class="fa-solid fa-circle-info"></i></h3>
+                        <input type="checkbox" id="toggleShading" class="toggleShading toggleSettingCheckbox changeStyle">
+                        <label class="toggleSettingLabel" for="toggleShading"></label>
+                        <div class="innerSettingContainer">
+                            <h3>Dimension of cell</h3>
+                            <input type="range" min="1" max="8" id="shadeSensitivity"
+                                value="3" class="shadePrecision notSilhouette"
+                                oninput="this.nextElementSibling.value = this.value">
+                            <output>3</output>
+                            <h3>Color</h3>
+                            <input id="shadeColor" type="color" class="shadeColor colorInput">
+                        </div>
+                    </div>
+                    <div class="outerSettingContainer">
+                        <h3 class="title">Outline <i id="outlineIcon" class="fa-solid fa-circle-info"></i></h3>
+                        <input type="checkbox" id="toggleOutline" class="toggleOutline toggleSettingCheckbox changeStyle">
+                        <label class="toggleSettingLabel" for="toggleOutline"></label>
+                        <div class="innerSettingContainer">
+                            <h3>Color difference threshold</h3>
+                            <input type="range" min="0" max="255" 
+                                value="64" class="lineSensitivity" id="minColorDiff"
+                                oninput="this.nextElementSibling.value = this.value">
+                            <output>64</output>
+                            <h3>Minimum percent of neighbors</h3>
+                            <input type="range" min="0" max="100" value="50" 
+                            class="neighborRequirement" id="minNeighbors"
+                            oninput="this.nextElementSibling.value = this.value">
+                            <output>50</output>
+                            <h3>Color</h3>
+                            <input id="lineColor" type="color" class="lineColor colorInput">
+                        </div>
+                    </div>
+                    <div class="outerSettingContainer">
+                        <h3 class="title">Refine Outline <i id="refineIcon" class="fa-solid fa-circle-info"></i></h3>
+                        <input type="checkbox" id="toggleRefining" class="toggleRefining toggleSettingCheckbox">
+                        <label class="toggleSettingLabel" for="toggleRefining"></label>
+                        <div class="innerSettingContainer">
+                            <h3>Minimum continguous line size</h3>
+                            <input type="range" min="2" max="100" 
+                                value="10" class="refiningQuotient" id="minLineSize"
+                                oninput="this.nextElementSibling.value = this.value">
+                            <output>10</output>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="step step5">
+                <h2>Step Five: Enjoy</h2>
+                <button id="start" class="start">Draw</button>
+                <div class="progress"></div>
+                <div id="status" class="status"></div>
+            </div>
+        </main>
         <div class="canvasContainer">
-            <canvas id="originalCanvas" style="position: absolute; z-index: 0;"></canvas>
-            <canvas id="shadeCanvas" style="position: absolute; z-index: 1;"></canvas>
-            <canvas id="lineCanvas" style="position: absolute; z-index: 2;"></canvas>
+            <canvas id="originalCanvas" class="originalCanvas"></canvas>
+            <canvas id="shadeCanvas" class="shadeCanvas"></canvas>
+            <canvas id="lineCanvas" class="lineCanvas"></canvas>
         </div>
-    </main>
-</body>
-
+    </body>
 </html>
