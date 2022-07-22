@@ -12,6 +12,7 @@ export class Etching {
 
   getVaraibles(){
     this.startButton = document.getElementById('start');
+    this.status = document.getElementById('status');
 
     this.shade = Boolean(document.getElementById('toggleShading').checked);
     this.shadeUnit = parseInt(document.getElementById('shadeSensitivity').value);
@@ -78,30 +79,31 @@ export class Etching {
   }
 
   async etchify(){
-    await timeout(4)
-    this.startButton.innerText = "processing"
-    await timeout(4)
+    await timeout(16)
+    this.status.innerText = "processing..."
+    await timeout(16)
     this.processImage()
     if (this.line) {
-      await timeout(4)
-      this.startButton.innerText = "drawing lines"
-      await timeout(4)
+      await timeout(16)
+      this.status.innerText = "drawing lines..."
+      await timeout(16)
       this.drawLines()
       if (this.refine) {
-        await timeout(4)
-        this.startButton.innerText = "refining lines"
-        await timeout(4)
+        await timeout(16)
+        this.status.innerText = "refining lines..."
+        await timeout(16)
         this.refineLinePixels()
       }
     }
     if (this.shade) {
-      await timeout(4)
-      this.startButton.innerText = "shading"
-      await timeout(4)
+      await timeout(16)
+      this.status.innerText = "shading..."
+      await timeout(16)
       this.shadeEtching()
     }
-    await timeout(4)
+    await timeout(16)
     this.startButton.innerText = "redraw"
+    this.status.innerText = ""
   }
 
   processImage(){

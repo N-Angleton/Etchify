@@ -10391,7 +10391,7 @@ header {
   outline: 4px solid;
   outline-color: transparent;
   outline-offset: -4px;
-  animation: fadeInBorder 3s, fadeInColor 3s;
+  animation: fadeInBorder 3s, fadeInBlack 3s;
 }
 
 @keyframes fadeInBorder {
@@ -10402,7 +10402,7 @@ header {
     outline-color: transparent;
   }
 }
-@keyframes fadeInColor {
+@keyframes fadeInBlack {
   0% {
     color: #f7f3eb;
   }
@@ -10411,6 +10411,17 @@ header {
   }
   100% {
     color: black;
+  }
+}
+@keyframes fadeInGray {
+  0% {
+    color: #f7f3eb;
+  }
+  25% {
+    color: #f7f3eb;
+  }
+  100% {
+    color: gray;
   }
 }
 @keyframes fadeInOpacity {
@@ -10440,24 +10451,23 @@ a {
 }
 
 .icons i {
-  color: black;
+  color: gray;
   margin: 0 auto;
   width: auto;
-  animation: fadeInColor 6s;
+  animation: fadeInGray 3s;
 }
 
 i {
-  color: black;
+  color: gray;
   font-size: 2rem;
   padding-bottom: 3px;
-  border-bottom: 4px solid #f7f3eb;
-  transition: border-bottom 500ms;
+  transition: color 250ms;
 }
 
 a:focus i,
 a:focus-within i,
 a:hover i {
-  border-bottom: 4px solid black;
+  color: black;
 }
 
 main {
@@ -10552,6 +10562,7 @@ main {
 }
 
 .radio {
+  -webkit-appearance: none;
   appearance: none;
   background-color: #f7f3eb;
   margin: 0;
@@ -10816,7 +10827,7 @@ input[type=range] {
   border: 4px solid black;
 }
 
-.progress {
+.otherDivider {
   display: block;
   margin: 0 auto;
   margin-top: 0.25em;
@@ -10824,6 +10835,19 @@ input[type=range] {
   height: 3px;
   padding: 0.5em;
   background: linear-gradient(to right, #f7f3eb 0%, black 50%, #f7f3eb 100%) no-repeat 0% 100%/100% 3px;
+}
+
+.status {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1em;
+  font-size: 2em;
+  padding: 0.375em;
+  transition: all 1s;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+  justify-content: center;
 }
 
 .canvasContainer {

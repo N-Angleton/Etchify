@@ -74,12 +74,13 @@ export function removeColor(e){
 export async function processImage(e){
   e.stopPropagation();
   const startButton = document.getElementById('start');
+  const status = document.getElementById('status')
 
   const upload = document.getElementById('upload');
   const files = upload.files;
 
   if (files.length === 0) {
-    startButton.innerText = "Please select a file first"
+    status.innerText = "Please select a file first"
     return
   }
 
@@ -87,7 +88,7 @@ export async function processImage(e){
   const lineBox = document.getElementById('toggleOutline')
 
   if (!(shadeBox.checked || lineBox.checked)) {
-    startButton.innerText = "Please select shade or outline"
+    status.innerText = "Please select shade or outline"
     return
   }
 

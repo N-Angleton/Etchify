@@ -21,8 +21,7 @@ header {
     outline: 4px solid;
     outline-color: transparent;
     outline-offset: -4px;
-    animation: fadeInBorder 3s, fadeInColor 3s;
-    // transition: outline-color 1s;
+    animation: fadeInBorder 3s, fadeInBlack 3s;
 }
 
 @keyframes fadeInBorder {
@@ -34,7 +33,7 @@ header {
     }
 }
 
-@keyframes fadeInColor {
+@keyframes fadeInBlack {
     0% {
         color: $bg-color;
     }
@@ -43,6 +42,18 @@ header {
     }
     100% {
         color: black;
+    }
+}
+
+@keyframes fadeInGray {
+    0% {
+        color: $bg-color;
+    }
+    25% {
+        color: $bg-color;
+    }
+    100% {
+        color: gray;
     }
 }
 
@@ -74,22 +85,23 @@ a {
 }
 
 .icons i {
-    color: black;
+    color: gray;
     margin: 0 auto;
     width: auto;
-    animation: fadeInColor 6s;
+    animation: fadeInGray 3s;
 }
 
 i {
-    color: black;
+    color: gray;
     font-size: 2rem;
     padding-bottom: 3px;
-    border-bottom: 4px solid $bg-color;
-    transition: border-bottom 500ms;
+    // border-bottom: 4px solid $bg-color;
+    transition: color 250ms;
 }
 
 a:focus i,
 a:focus-within i,
 a:hover i {
-    border-bottom: 4px solid black;
+    // border-bottom: 4px solid black;
+    color: black;
 }
