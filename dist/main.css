@@ -10805,6 +10805,10 @@ input[type=range] {
   display: none;
 }
 
+#start {
+  color: black;
+}
+
 .start {
   cursor: pointer;
   display: block;
