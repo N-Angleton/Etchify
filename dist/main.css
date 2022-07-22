@@ -10813,6 +10813,7 @@ input[type=range] {
   font-size: 2em;
   padding: 0.375em;
   border-radius: 0.5em;
+  color: black;
   background-color: #f7f3eb;
   border: 4px solid #f7f3eb;
   outline: 2px solid black;
