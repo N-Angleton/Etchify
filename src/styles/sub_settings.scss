@@ -22,7 +22,7 @@
     font-size: 1em;
     padding: .375em;
     border-radius: .5em;
-    outline: 2px solid black;
+    border: 2px solid black;
     transition: all 1s;
     height: fit-content;
     width: 2em;
@@ -51,5 +51,6 @@
     padding-left: 1em;
     padding-right: 1em;
     margin-top: 2rem;
-    background: linear-gradient(to right, $bg-color 0%, black 50%, $bg-color 100%) no-repeat 100% 100% / 100% 3px
+    padding-bottom: .5rem;
+    background: linear-gradient(to right, $bg-color 0%, black 50%, $bg-color 100%) no-repeat 100% 100% / 100% 3px;
 }

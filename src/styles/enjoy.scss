@@ -12,9 +12,8 @@
     border-radius: .5em;
     color: black;
     background-color: $bg-color;
-    border: 4px solid $bg-color;
-    outline: 2px solid black;
-    transition: all 1s;
+    border: 2px solid black;
+    transition: all 500ms;
     height: fit-content;
     width: fit-content;
     text-align: center;
@@ -22,7 +21,7 @@
 }
 
 .start:hover {
-    border: 4px solid black;
+    box-shadow: inset 0 0 0 4px black;
 }
 
 .otherDivider {
