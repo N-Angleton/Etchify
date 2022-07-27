@@ -2,7 +2,9 @@
 
 ## Description
 
-The website emulates traditional etchings by processing user uploaded images. Users are able to customize the produced image through a variety of settings, though the decision making process is streamlined, so that the user need only make essential choices and can optionally explore more advanced settings.
+Etchify is single page website that creates etchings of user uploaded photos. This is achieved through line recongition and shading that matches the percieved luminosity of the original image. Users are able to customize the produced etching through a variety of settings, though the decision making process is streamlined, so that the user need only make essential choices and can optionally explore more advanced settings.
+
+
 
 ## Live
 
@@ -14,13 +16,23 @@ Upload an image [here](https://etchify.io)!
 - [Live link](#live)
 - [Languages and Technologies](#languages-and-technologies)
 - [The Pixel Logic](#the-pixel-logic)
-- [Functionalities and MVPs](#mvp-functionality)
+- [Functionalities](#functionalities)
 - [Future considerations](#future-considerations)
 - [Acknowledgements](#acknowledgements)
 
 ## Languages and Technologies
 
-The site is single
+- Node.js
+- Vanilla DOM manipulation
+- HTML5
+- SCSS
+- Canvas API
+- Webpack
+- Npm for managing dependencies
+
+## Functionalities
+
+
 
 ## Styles
 
