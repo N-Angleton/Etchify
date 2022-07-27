@@ -6,7 +6,7 @@ The website emulates traditional etchings by processing user uploaded images. Us
 
 ## Live
 
-Upload an image [here](https://n-angleton.github.io/Etchify/)!
+Upload an image [here](https://etchify.io)!
 
 ## Table of Content
 
