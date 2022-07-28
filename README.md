@@ -15,7 +15,6 @@ Upload an image [here](https://etchify.io)!
 - [Languages and Technologies](#languages-and-technologies)
 - [Functionalities](#functionalities)
 - [Future considerations](#future-considerations)
-- [Acknowledgements](#acknowledgements)
 
 ## Languages and Technologies
 
@@ -24,20 +23,20 @@ Upload an image [here](https://etchify.io)!
 - HTML5
 - SCSS
 - Canvas API
-- Webpack
+- Webpack for bundling javascript
 - Npm for managing dependencies
 
 ## Functionalities
 
-
-
-## Styles
-
-Users are able to select from four styles: shade, outline, shade & outline, and silhouette.
+For the etching, users are able to select from four styles: shade, outline, shade & outline, and silhouette.
 
 **Shade** will analyze the original image as a grid of *n* by *n* cells, and will match the percieved luminance of each cell with an appropriate amount of shading. The size of *n* can be adjsuted as an advanced setting.
 
 **Outline** employs line recongition to trace 
+
+**Shade & Outline**
+
+**Silhouette** 
 
 ## The Pixel Logic
 
