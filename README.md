@@ -16,6 +16,7 @@ Create an etching [here](https://etchify.io)!
 - [On Features & Functions](#on-features--functions)
 - [On Pixel Logic & Code](#on-pixel-logic--code)
 - [Future considerations](#future-considerations)
+- [Footnotes](#footnotes)
 
 ## Languages & Technologies
 
