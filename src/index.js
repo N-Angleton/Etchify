@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         colorInputs[i].addEventListener('change', removeColor);
     }
 
-    const lineSlider = document.getElementById('shadeSensitivity')
+    const lineSlider = document.getElementById('shadeSensitivity');
     lineSlider.addEventListener('change', () => {
         if (lineSlider.value !== 1) {
             const silhouette = document.getElementById('style4');

@@ -1,29 +1,29 @@
 import { Etching } from "./etching";
 
-export function checkFile(e){
+export function checkFile(e) {
   e.stopPropagation();
 
   const files = e.target.files;
   const fileName = document.getElementById('fileInputContainer');
   const startButton = document.getElementById('start');
 
-  startButton.innerText ="Draw"
+  startButton.innerText = "Draw";
 
   if (files.length === 0) {
     fileName.innerText = 'Choose File';
-    fileName.classList.remove('selected')
+    fileName.classList.remove('selected');
   }
-  if (files.length === 1 ) {
+  if (files.length === 1) {
     fileName.innerText = files[0].name;
-    fileName.classList.add('selected')
+    fileName.classList.add('selected');
   }
 }
 
-export function updateStyle(e){
+export function updateStyle(e) {
   e.stopPropagation();
-  const shadeBox = document.getElementById('toggleShading')
-  const lineBox = document.getElementById('toggleOutline')
-  const lineSlider = document.getElementById('shadeSensitivity')
+  const shadeBox = document.getElementById('toggleShading');
+  const lineBox = document.getElementById('toggleOutline');
+  const lineSlider = document.getElementById('shadeSensitivity');
   if (e.target.value === 'shade') {
     shadeBox.checked = true;
     lineBox.checked = false;
@@ -50,7 +50,7 @@ export function updateStyle(e){
   }
 }
 
-export function updateColor(e){
+export function updateColor(e) {
   e.stopPropagation();
   const lineColor = document.getElementById('lineColor');
   const shadeColor = document.getElementById('shadeColor');
@@ -59,39 +59,39 @@ export function updateColor(e){
   shadeColor.value = color;
 }
 
-export function removeStyle(e){
+export function removeStyle(e) {
   e.stopPropagation();
   const checkedButton = document.querySelector('.style:checked');
   if (checkedButton) checkedButton.checked = false;
 }
 
-export function removeColor(e){
+export function removeColor(e) {
   e.stopPropagation();
   const checkedColor = document.querySelector('.color:checked');
   if (checkedColor) checkedColor.checked = false;
 }
 
-export async function processImage(e){
+export async function processImage(e) {
   e.stopPropagation();
   const startButton = document.getElementById('start');
-  const status = document.getElementById('status')
+  const status = document.getElementById('status');
 
   const upload = document.getElementById('upload');
   const files = upload.files;
 
   if (files.length === 0) {
-    status.innerText = "Please select a file first"
-    return
+    status.innerText = "Please select a file first";
+    return;
   }
 
-  const shadeBox = document.getElementById('toggleShading')
-  const lineBox = document.getElementById('toggleOutline')
+  const shadeBox = document.getElementById('toggleShading');
+  const lineBox = document.getElementById('toggleOutline');
 
   if (!(shadeBox.checked || lineBox.checked)) {
-    status.innerText = "Please select shade or outline"
-    return
+    status.innerText = "Please select shade or outline";
+    return;
   }
 
-  let bitmap = await createImageBitmap(files[0])
-  new Etching(bitmap)
+  let bitmap = await createImageBitmap(files[0]);
+  new Etching(bitmap);
 }
