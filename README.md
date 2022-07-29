@@ -32,6 +32,10 @@ Create an etching [here](https://etchify.io)!
 
 For the etching, users are directed to upload an image, select a color, and select one of four styles: **Shade**, **Outline**, **Shade & Outline**, and **Silhouette**. Of additional note, among the advanced settings, users can decide the shading and outline colors separately and can opt for **Refine Outline**.
 
+<p align="center">
+  <img src="./src/assets/images/settings.png" alt="Screenshot of Settings">
+</p>
+
 As an example image to be processed, we will use *The Great Wave off Kanagawa* by Hokusai.[^1] The woodblock print's contrast in brightness and solid colors are well-suited for the software, though great results can be achieved with a wide variety of images.
 
 <p align="center">
