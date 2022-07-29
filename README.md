@@ -31,7 +31,7 @@ Create an etching [here](https://etchify.io)!
 
 For the etching, users are directed to upload an image, select a color, and select one of four styles: **Shade**, **Outline**, **Shade & Outline**, and **Silhouette**. Of additional note, among the advanced settings, users can decide the shading and outline colors separately and can opt for **Refine Outline**.
 
-- **Shade** will analyze the original image as a grid of *n* by *n* cells, and will match the percieved luminance of each cell with an appropriate amount of shading. The percieved lumninance of each pixel in the cell is calculated from its RGB values using an industry standard formula:<p align="center">Luminance = .299(R) + .587(G) + .114(B)[^1]</p>The size of *n* is referred to as the **Dimension of the Cell** and can be adjusted as an advanced setting. Increasing the **Dimension of the Cell** has a twofold impact: it simultaneously increases the pixellation of the resulting image, while also increasing the number of tones.
+- **Shade** will analyze the original image as a grid of *n* by *n* cells, and will match the percieved luminance of each cell with an appropriate amount of shading. The percieved lumninance of each pixel in the cell is calculated from its *RGB* values using an industry standard formula:<p align="center">Luminance = .299(R) + .587(G) + .114(B)[^1]</p>The size of *n* is referred to as the **Dimension of the Cell** and can be adjusted as an advanced setting. Increasing the **Dimension of the Cell** has a twofold impact: it simultaneously increases the pixellation of the resulting image, while also increasing the number of tones.
 
 - **Outline** employs line recongition to trace the original image. A candidate pixel is designated as a line if it differs enough from its neighbors. This calculation is performed with a five by five kernel centered on the candidate pixel. The neighboring pixels each "vote" on if the candidate pixel is a line. With each neighboring pixel, their vote depends on if their color difference exceeds the **Color Difference Threshold**, an advanced setting, and is weighted according to the inverse square of their distance from the candidate pixel. If the overall vote exceeds the **Minimum Percent of Neighbors**, an additional advanced setting, the candidate pixel is considered part of the outline.
 
@@ -39,7 +39,7 @@ For the etching, users are directed to upload an image, select a color, and sele
 
 - **Silhouette** is actually a particular application of the **Shading** algorithm, produced by setting the **Dimension of the Cell** to one. The result is that each pixel is considered its own cell, which means that there is essentially no pixellation, but each pixel can only be one of two tones: the background color or the shading color.
 
-- **Refine Outline** is an advanced option that allows the user to reduce the "noise" produced by the **Outline** algorithm. It achieves this by removing any line pixels that are not part of a sufficiently large contiguous line complex. This threshold can be adjusted as the **Minimum Contiguous Line Size**. Currently this features employs a 2d array of line pixels, which while functional, has poor time and space complexity, and is in need of refactoring.
+- **Refine Outline** is an advanced option that allows the user to reduce the "noise" produced by the **Outline** algorithm. It achieves this by removing any line pixels that are not part of a sufficiently large contiguous line complex. This threshold can be adjusted as the **Minimum Contiguous Line Size**. Currently this features employs a 2d array of line pixels, which while functional, has poor time and space complexity, and is in need of refactoring as a linked list.
 
 ## On Pixel Logic & Code
 
@@ -49,4 +49,4 @@ For the etching, users are directed to upload an image, select a color, and sele
 
 ## Footnotes
 
-[^1]: This formula is typically used to calculate the *Y* component in RGB to YIQ conversion. Documentation can be found [here](https://www.eembc.org/techlit/datasheets/yiq_consumer.pdf).
+[^1]: This formula is typically used to calculate the *Y* component in *RGB* to *YIQ* conversion. Documentation can be found [here](https://www.eembc.org/techlit/datasheets/yiq_consumer.pdf).
