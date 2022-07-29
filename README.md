@@ -6,7 +6,7 @@ Etchify is a single page website that creates etchings from user uploaded photos
 
 ## Live
 
-Upload an image [here](https://etchify.io)!
+Create an etching [here](https://etchify.io)!
 
 ## Table of Contents
 
@@ -31,9 +31,9 @@ Upload an image [here](https://etchify.io)!
 
 For the etching, users are directed to upload an image, select a color, and select one of four styles: **Shade**, **Outline**, **Shade & Outline**, and **Silhouette**. Of additional note, among the advanced settings, users can decide the shading and outline colors separately and can opt for **Refine Outline**.
 
-- **Shade** will analyze the original image as a grid of *n* by *n* cells, and will match the percieved luminance of each cell with an appropriate amount of shading. The percieved lumninance of a cell is calculated from the RGB using the formula The size of *n* is referred to as the **Dimension of the Cell** and can be adjusted as an advanced setting. Increasing the **Dimension of the Cell** has a twofold impact: it simultaneously increases the pixellation of the resulting image, while also increasing the number of tones.
+- **Shade** will analyze the original image as a grid of *n* by *n* cells, and will match the percieved luminance of each cell with an appropriate amount of shading. The percieved lumninance of each pixel in the cell is calculated from its RGB values using an industry standard formula:<p align="center">Luminance = .299(R) + .587(G) + .114(B)</p>The size of *n* is referred to as the **Dimension of the Cell** and can be adjusted as an advanced setting. Increasing the **Dimension of the Cell** has a twofold impact: it simultaneously increases the pixellation of the resulting image, while also increasing the number of tones.
 
-- **Outline** employs line recongition to trace the original image. A candidate pixel is designated as a line if it differs enough from its neighbors. This calculation is performed with a five by five kernel centered on the candidate pixel. The neighboring pixels each "vote" on if the candidate pixel is a line. For each neighbor pixel, their vote depends on if their color difference exceeds the **Color Difference Threshold**, an advanced setting, and is weighted according to the inverse square of their distance from the candidate pixel. If the overall vote exceeds the **Minimum Percent of Neighbors**, an additional advanced setting, the candidate pixel is considered part of the outline.
+- **Outline** employs line recongition to trace the original image. A candidate pixel is designated as a line if it differs enough from its neighbors. This calculation is performed with a five by five kernel centered on the candidate pixel. The neighboring pixels each "vote" on if the candidate pixel is a line. With each neighboring pixel, their vote depends on if their color difference exceeds the **Color Difference Threshold**, an advanced setting, and is weighted according to the inverse square of their distance from the candidate pixel. If the overall vote exceeds the **Minimum Percent of Neighbors**, an additional advanced setting, the candidate pixel is considered part of the outline.
 
 - **Shade & Outline** merely employs both the **Shading** and the **Outline** algorithms at once, with the outline resting atop the shading.
 
