@@ -2,7 +2,7 @@
 
 ## Description
 
-Etchify is a single page website that creates etchings from user uploaded photos. This is achieved through line recongition and shading that matches the percieved luminosity of the original image. Users are able to customize the produced etching through a variety of settings. The decision making process is streamlined so that users need only make essential choices, and can explore more advanced settings if they wish.
+Etchify is a single page website that creates etchings from user uploaded photos. This is achieved through line recongition and shading that matches the percieved luminosity of the original image. Users are able to customize the produced etching through a variety of settings. The user experience is streamlined so that users need only make essential choices, and can explore more advanced settings if they wish.
 
 ## Live
 
