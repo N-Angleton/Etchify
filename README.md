@@ -33,7 +33,7 @@ Create an etching [here](https://etchify.io)!
 For the etching, users are directed to upload an image, select a color, and select one of four styles: **Shade**, **Outline**, **Shade & Outline**, and **Silhouette**. Of additional note, among the advanced settings, users can decide the shading and outline colors separately and can opt for **Refine Outline**.
 
 <p align="center">
-  <img src="./src/assets/images/settings.png" alt="Screenshot of Settings">
+  <img width="900px" src="./src/assets/images/settings.png" alt="Screenshot of Settings">
 </p>
 
 As an example image to be processed, we will use *The Great Wave off Kanagawa* by Hokusai.[^1] The woodblock print's contrast in brightness and solid colors are well-suited for the software, though great results can be achieved with a wide variety of images.
@@ -74,7 +74,37 @@ As an example image to be processed, we will use *The Great Wave off Kanagawa* b
 
 ## On Pixel Logic & Code
 
+```javascript
+processImage(){
+    this.pixels = {}
 
+    for (let row = 0; row < this.height; row++) {
+      for (let column = 0; column < this.width; column++) {
+        let currentIndex = this.pixelIndex(row, column)
+        let currentRGB = this.retrievePixelRGB(currentIndex)
+        let currentDarkness = this.calculateDarkness(currentRGB)
+  
+        this.pixels[currentIndex] = new Pixel(currentRGB, currentDarkness)
+  
+        let currentPixel = this.pixels[currentIndex]
+  
+        if (this.line) {
+          let precedingNeighbors = this.precedingNeighbors(row, column)
+  
+          precedingNeighbors.forEach( (neighborValues) => {
+            let neighborIndex = neighborValues[0]
+            let weight = neighborValues[1];
+            let neighbor = this.pixels[neighborIndex];
+            let neighborRGB = neighbor.colors;
+            let colorDifference = this.calculateColorDifference(currentRGB, neighborRGB);
+            Pixel.addColorDifference(currentPixel, neighbor, colorDifference, weight)
+          })
+        }
+      }
+
+    }
+  }
+```
 
 ## Future Considerations
 
