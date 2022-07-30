@@ -16,7 +16,6 @@ Create an etching [here](https://etchify.io)!
 - [On Features & Functions](#on-features--functions)
 - [On Pixel Logic & Code](#on-pixel-logic--code)
 - [Future considerations](#future-considerations)
-- [Footnotes](#footnotes)
 
 ## Languages & Technologies
 
@@ -87,7 +86,9 @@ processImage(){
         this.pixels[currentIndex] = new Pixel(currentRGB, currentDarkness)
   
         let currentPixel = this.pixels[currentIndex]
-  
+        
+        \\ The below conditional tests if the user
+        \\ selected to draw the outline
         if (this.line) {
           let precedingNeighbors = this.precedingNeighbors(row, column)
   
@@ -101,14 +102,15 @@ processImage(){
           })
         }
       }
-
     }
   }
 ```
+The above function is the initial image processing. It precedes by rows and columns, instead of the raw pixel index, in order to make its operation more inutuitive. It creates a *Pixel* instance for every pixel in the source image, which is saved in an object called *Pixels*. Each *Pixel* has its colors and luminance saved, and if outline is selected, the color differences and inverse-squared-distances (referred to as weight) of its neighbors are saved as well. As a minor optimization, since the neighbor relationship is mutual, the static *Pixel* method```javascript addColorDifference()``` adds the combination of color differences and weights to both *Pixel* instances.
+
 
 ## Future Considerations
 
-## Footnotes
+
 
 [^1]: The source for this image can be found [here](https://en.wikipedia.org/wiki/File:Tsunami_by_hokusai_19th_century.jpg).
 [^2]: This formula is typically used to calculate the *Y* component in *RGB* to *YIQ* conversion. Documentation can be found [here](https://www.eembc.org/techlit/datasheets/yiq_consumer.pdf).
