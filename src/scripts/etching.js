@@ -111,7 +111,6 @@ export class Etching {
 
     for (let row = 0; row < this.height; row++) {
       for (let column = 0; column < this.width; column++) {
-
         let currentIndex = this.pixelIndex(row, column);
         let currentRGB = this.retrievePixelRGB(currentIndex);
         let currentDarkness = this.calculateDarkness(currentRGB);
@@ -129,22 +128,19 @@ export class Etching {
             let neighbor = this.pixels[neighborIndex];
             let neighborRGB = neighbor.colors;
             let colorDifference = this.calculateColorDifference(currentRGB, neighborRGB);
-
             Pixel.addColorDifference(currentPixel, neighbor, colorDifference, weight);
           });
         }
       }
+
     }
   }
 
   drawLines() {
     this.unrefinedLinePixels = [];
-
     for (let i = 0; i < this.numberOfPixels * 4; i += 4) {
-
       if ((this.pixels[i / 4].line(this.lineSensitivity, this.neighborRequirement))) {
         this.unrefinedLinePixels.push(i / 4);
-
         this.lineData.data[i] = this.lineRgb.red;
         this.lineData.data[i + 1] = this.lineRgb.green;
         this.lineData.data[i + 2] = this.lineRgb.blue;
