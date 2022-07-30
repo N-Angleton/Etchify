@@ -105,7 +105,7 @@ processImage(){
     }
   }
 ```
-The above function is the initial image processing. It precedes by rows and columns, instead of the raw pixel index, in order to make its operation more inutuitive. It creates a *Pixel* instance for every pixel in the source image, which is saved in an object called *Pixels*. Each *Pixel* has its colors and luminance saved, and if outline is selected, the color differences and inverse-squared-distances (referred to as weight) of its neighbors are saved as well. As a minor optimization, since the neighbor relationship is mutual, the static *Pixel* method```javascript addColorDifference()``` adds the combination of color differences and weights to both *Pixel* instances.
+The above function is the initial image processing. It proceeds by rows and columns, instead of the raw pixel index, in order to make its operation more inutuitive. It creates a *Pixel* instance for every pixel in the source image, which is saved in an object called *Pixels*. Each *Pixel* has its colors and luminance saved, and if outline is selected, the color differences and inverse-squared-distances (referred to as weight) of its neighbors are saved as well. As a minor optimization, since the neighbor relationship is mutual, the static *Pixel* method```javascript addColorDifference()``` adds the combination of color differences and weights to both *Pixel* instances.
 
 
 ## Future Considerations
