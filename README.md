@@ -2,7 +2,7 @@
 
 ## Description
 
-Etchify is a single page website that creates etchings from user uploaded photos. This is achieved through line recongition and shading that matches the percieved luminosity of the original image. Users are able to customize the produced etching through a variety of settings. The user experience is streamlined so that users need only make essential choices, and can explore more advanced settings if they wish.
+Etchify is a single page website that creates etchings from user uploaded photos. This is achieved through line recognition and shading that matches the perceived luminosity of the original image. Users are able to customize the produced etching through a variety of settings. The user experience is streamlined so that users need only make essential choices, and can explore more advanced settings if they wish.
 
 ## Live
 
@@ -41,13 +41,13 @@ As an example image to be processed, we will use *The Great Wave off Kanagawa* b
   <img width="450px" src="./src/assets/images/The_Great_Wave_off_Kanagawa.jpeg" alt="The Great Wave off Kanagawa by Hokusai">
 </p>
 
-- **Shade** will analyze the original image as a grid of *n* by *n* cells, and will match the percieved luminance of each cell with an appropriate amount of shading. Each pixel is either shaded or not, meaning there are no intermediate tones. Given this, the luminance of a cell is purely a produce of what percentage of its pixels are shaded. The percieved lumninance of each pixel in the cell is calculated from its *RGB* values and summed to determine the cell's overal luminance. This calculation is performed using an industry standard formula:<p align="center">Luminance = .299(R) + .587(G) + .114(B)[^2]</p>The size of *n* is referred to as the **Dimension of the Cell** and can be adjusted as an advanced setting. Increasing the **Dimension of the Cell** has a twofold impact: it simultaneously increases the pixellation of the resulting image, while also increasing the number of tones.
+- **Shade** will analyze the original image as a grid of *n* by *n* cells, and will match the perceived luminance of each cell with an appropriate amount of shading. Each pixel is either shaded or not, meaning there are no intermediate tones. Given this, the luminance of a cell is purely a produce of what percentage of its pixels are shaded. The perceived luminance of each pixel in the cell is calculated from its *RGB* values and summed to determine the cell's overall luminance. This calculation is performed using an industry standard formula:<p align="center">Luminance = .299(R) + .587(G) + .114(B)[^2]</p>The size of *n* is referred to as the **Dimension of the Cell** and can be adjusted as an advanced setting. Increasing the **Dimension of the Cell** has a twofold impact: it simultaneously increases the pixellation of the resulting image, while also increasing the number of tones.
 
 <p align="center">
   <img width="450px" src="./src/assets/images/shade.png" alt="Shading of The Great Wave off Kanagawa">
 </p>
 
-- **Outline** employs line recongition to trace the original image. A candidate pixel is designated as a line if it differs enough from its neighbors. This calculation is performed with a five by five kernel centered on the candidate pixel. The neighboring pixels each "vote" on if the candidate pixel is a line. With each neighboring pixel, their vote depends on if their color difference exceeds the **Color Difference Threshold**, an advanced setting, and is weighted according to the inverse square of their distance from the candidate pixel. If the overall vote exceeds the **Minimum Percent of Neighbors**, an additional advanced setting, the candidate pixel is considered part of the outline.
+- **Outline** employs line recognition to trace the original image. A candidate pixel is designated as a line if it differs enough from its neighbors. This calculation is performed with a five by five kernel centered on the candidate pixel. The neighboring pixels each "vote" on if the candidate pixel is a line. With each neighboring pixel, their vote depends on if their color difference exceeds the **Color Difference Threshold**, an advanced setting, and is weighted according to the inverse square of their distance from the candidate pixel. If the overall vote exceeds the **Minimum Percent of Neighbors**, an additional advanced setting, the candidate pixel is considered part of the outline.
 
 <p align="center">
   <img width="450px" src="./src/assets/images/outline.png" alt="Outline of The Great Wave off Kanagawa">
@@ -103,7 +103,7 @@ processImage() {
   }
 }
 ```
-The above function is the initial image processing. It proceeds by rows and columns, instead of the raw pixel index, in order to make its operation more inutuitive. It creates a *Pixel* instance for every pixel in the source image, which is saved in an object called *Pixels*. Each *Pixel* has its colors and luminance saved, and if outline is selected, the color differences and inverse-squared-distances (referred to as weight) of its preceding neighbors are saved as well. As a minor optimization, since the neighbor relationship is mutual, the static *Pixel* method```javascript addColorDifference()``` adds the combination of color differences and weights to both *Pixel* instances.
+The above function is the initial image processing. It proceeds by rows and columns, instead of the raw pixel index, in order to make its operation more intuitive. It creates a *Pixel* instance for every pixel in the source image, which is saved in an object called *Pixels*. Each *Pixel* has its colors and luminance saved, and if outline is selected, the color differences and inverse-squared-distances (referred to as weight) of its preceding neighbors are saved as well. As a minor optimization, since the neighbor relationship is mutual, the static *Pixel* method```javascript addColorDifference()``` adds the combination of color differences and weights to both *Pixel* instances.
 
 The creation of the the *Pixels* object, as well as its composite *Pixel* instances, was to allow for more rapid reprocessing. In essence, this information is stable, even when the majority of the settings are adjusted. Currently, redrawing the image causes complete reprocessing, which is one of the issues discussed below in [Future Considerations](#future-considerations).
 
@@ -116,13 +116,13 @@ The creation of the the *Pixels* object, as well as its composite *Pixel* instan
 - Allow users to select the background color
 - Allow users to use either a 3-by-3 or 5-by-5 kernel for the outline recognition
 - Refactor HTML and CSS to be more DRY
-- Refactor silhouette as a separate process, and allows for users to specifiy multiple darkness thresholds and corresponding colors
+- Refactor silhouette as a separate process, and allows for users to specific multiple darkness thresholds and corresponding colors
 - Add additional vanilla DOM manipulation to have steps appear only after the previous steps have been completed
 
 ### Problems being Researched
 
 - Allow users to download the produced image, and additionally allow users to directly share the images on Instagram
-- Identify the best way to temporaily save the etching data (potentially directly on the window or localStorage) to allow for rapid reprocessing
+- Identify the best way to temporarily save the etching data (potentially directly on the window or localStorage) to allow for rapid reprocessing
 - Identify and implement a better way to have background Javascript processes with an updating document, so that the user can be more precisely apprised of the stage of the process
 - Add an additional style using the Fourier series to mimic the outline data
 
