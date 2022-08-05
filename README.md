@@ -117,13 +117,13 @@ The creation of the the *Pixels* object, as well as its composite *Pixel* instan
 - Allow users to use either a 3-by-3 or 5-by-5 kernel for the outline recognition
 - Refactor HTML and CSS to be more DRY
 - Refactor silhouette as a separate process, and allows for users to specifiy multiple darkness thresholds and corresponding colors
-- Add additional vanilla DOM manipulation to have steps apear only after the previous steps have been completed
+- Add additional vanilla DOM manipulation to have steps appear only after the previous steps have been completed
 
 ### Problems being Researched
 
 - Allow users to download the produced image, and additionally allow users to directly share the images on Instagram
 - Identify the best way to temporaily save the etching data (potentially directly on the window or localStorage) to allow for rapid reprocessing
-- Identify and implement a better way to have background Javascript processes with an updating document, so that the user can be more precesily apprised of the stage of the process
+- Identify and implement a better way to have background Javascript processes with an updating document, so that the user can be more precisely apprised of the stage of the process
 - Add an additional style using the Fourier series to mimic the outline data
 
 [^1]: The source for this image can be found [here](https://en.wikipedia.org/wiki/File:Tsunami_by_hokusai_19th_century.jpg).
