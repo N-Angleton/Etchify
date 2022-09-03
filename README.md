@@ -116,7 +116,7 @@ The creation of the the *Pixels* object, as well as its composite *Pixel* instan
 - Allow users to select the background color
 - Allow users to use either a 3-by-3 or 5-by-5 kernel for the outline recognition
 - Refactor HTML and CSS to be more DRY
-- Refactor silhouette as a separate process, and allows for users to specific multiple darkness thresholds and corresponding colors
+- Refactor silhouette as a separate process, and allows for users to specify multiple darkness thresholds and corresponding colors
 - Add additional vanilla DOM manipulation to have steps appear only after the previous steps have been completed
 
 ### Problems being Researched
