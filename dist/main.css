@@ -10424,6 +10424,17 @@ header {
     color: gray;
   }
 }
+@keyframes fadeInBackground {
+  0% {
+    background-color: #f7f3eb;
+  }
+  25% {
+    background-color: #f7f3eb;
+  }
+  100% {
+    background-color: gray;
+  }
+}
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;
@@ -10444,10 +10455,17 @@ header {
 }
 
 a {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
   margin-bottom: 0;
   outline: 0;
+  text-decoration: none;
+}
+
+.icons {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
 }
 
 .icons i {
@@ -10468,6 +10486,25 @@ a:focus i,
 a:focus-within i,
 a:hover i {
   color: black;
+}
+
+.angletonIcon {
+  color: #f7f3eb;
+  background-color: gray;
+  height: fit-content;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  padding-top: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  transition: background-color 250ms;
+  animation: fadeInBackground 3s;
+}
+
+.angletonIcon:focus,
+.angletonIcon:focus-within,
+.angletonIcon:hover {
+  background-color: black;
 }
 
 main {

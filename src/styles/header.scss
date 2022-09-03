@@ -57,6 +57,18 @@ header {
     }
 }
 
+@keyframes fadeInBackground {
+  0% {
+      background-color: $bg-color;
+  }
+  25% {
+      background-color: $bg-color;
+  }
+  100% {
+      background-color: gray;
+  }
+}
+
 @keyframes fadeInOpacity {
     0% {
         opacity: 0;
@@ -78,30 +90,54 @@ header {
 }
 
 a {
-    margin-left: .5rem;
-    margin-right: .5rem;
-    margin-bottom: 0;
-    outline: 0;
+  margin-left: .75rem;
+  margin-right: .75rem;
+  margin-bottom: 0;
+  outline: 0;
+  text-decoration: none;
+}
+
+.icons {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
 }
 
 .icons i {
-    color: gray;
-    margin: 0 auto;
-    width: auto;
-    animation: fadeInGray 3s;
+  color: gray;
+  margin: 0 auto;
+  width: auto;
+  animation: fadeInGray 3s;
 }
 
 i {
-    color: gray;
-    font-size: 2rem;
-    padding-bottom: 3px;
-    // border-bottom: 4px solid $bg-color;
-    transition: color 250ms;
+  color: gray;
+  font-size: 2rem;
+  padding-bottom: 3px;
+  transition: color 250ms;
 }
 
 a:focus i,
 a:focus-within i,
 a:hover i {
-    // border-bottom: 4px solid black;
-    color: black;
+  color: black;
+}
+
+.angletonIcon {
+  color: $bg-color;
+  background-color: gray;
+  height: fit-content;
+  font-size: 1.5rem;
+  border-radius: .5rem;
+  padding-top: .25rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  transition: background-color 250ms;
+  animation: fadeInBackground 3s;
+}
+
+.angletonIcon:focus,
+.angletonIcon:focus-within,
+.angletonIcon:hover {
+  background-color: black;
 }

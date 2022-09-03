@@ -1,7 +1,7 @@
 {
   "name": "etchify",
   "version": "1.0.0",
-  "description": "## Background and Core Functionality",
+  "description": "Transform images into etchings",
   "main": "index.js",
   "browserslist": [
     "defaults"
